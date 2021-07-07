@@ -1,0 +1,91 @@
+type Employee @model {
+  id: ID!
+  employee_id: ID!
+  employee_name: String!
+  full_name: String!
+  father_name: String!
+  cnic: String!
+  employee_addr: String!
+  employee_email: String!
+  employee_phone1: String!
+  employee_phone2: String!
+  employee_pic: String!
+  employee_salary: String!
+  role: String!
+  supervisor: String!
+  company: String!
+  blood_group: String
+  transport_mode: String
+  vichel_no: String
+  dob: String!
+  doj: String!
+  status: String!
+  end_date: String
+  last_degree: String!
+  institute: String!
+  leaves: [Leave] @connection(keyName: "byEmployee", fields: ["id"])
+  jobs: [Job] @connection(keyName: "byEmployee", fields: ["id"])
+  evaluation: [Evaluation] @connection(keyName: "byEmployee", fields: ["id"])
+  warnings: [Warning] @connection(keyName: "byEmployee", fields: ["id"])
+}
+type Leave @model @key(name: "byEmployee", fields: ["employee_id"]) {
+  id: ID!
+  employee_id: ID!
+  supervisor: String!
+  leave: String!
+  from: String!
+  to: String!
+  Lead_Approval: String!
+  Hr_Approval: String!
+  remarks: String!
+  type: String!
+  employee: Employee @connection(fields: ["employee_id"])
+}
+type Job @model @key(name: "byEmployee", fields: ["employee_id"]) {
+  id: ID!
+  employee_id: ID!
+  organization: String!
+  start_date: String!
+  end_date: String!
+  designation: String!
+  employee: Employee @connection(fields: ["employee_id"])
+}
+type Evaluation @model @key(name: "byEmployee", fields: ["employee_id"]) {
+  id: ID!
+  employee_id: ID!
+  reviewer_name: String!
+  reviewer_title: String!
+  employee_name: String!
+  reviewing_date: String!
+  q_one: String!
+  q_two: String!
+  q_three: String!
+  q_four: String!
+  q_five: String!
+  q_six: String!
+  q_seven: String!
+  q_eight: String!
+  q_nine: String!
+  q_ten: String!
+  q_eleven: String!
+  q_twelve: String!
+  q_thirteen: String!
+  q_fourteen: String!
+  q_fifteen: String!
+  q_sixteen: String!
+  q_seventeen: String!
+  q_eighteen: String!
+  q_nineteen: String!
+  q_twenty: String!
+  q_twentyone: String!
+  q_twentytwo: String!
+  employee: Employee @connection(fields: ["employee_id"])
+}
+type Warning @model @key(name: "byEmployee", fields: ["employee_id"]) {
+  id: ID!
+  employee_id: ID!
+  date: String!
+  type: String!
+  description: String!
+  employee: Employee @connection(fields: ["employee_id"])
+}

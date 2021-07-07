@@ -1,0 +1,26 @@
+.header {
+  position: relative;
+}
+@keyframes animatedBackground {
+  from {
+    background-position: 47% 0;
+  }
+  to {
+    background-position: 53% 0;
+  }
+}
+.header::before {
+  content: "";
+  position: absolute;
+  top: 5%;
+  right: 0;
+  background: url(../../../img/logo.png);
+  height: 60%;
+  width: 100%;
+  animation: animatedBackground 4s linear infinite alternate;
+  background-repeat: no-repeat;
+  background-position: 0px 0px;
+  background-size: contain;
+  z-index: 0;
+  opacity: 0.3;
+}

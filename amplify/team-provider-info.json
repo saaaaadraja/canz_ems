@@ -1,0 +1,19 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-ems-dev-134248-authRole",
+      "UnauthRoleArn": "arn:aws:iam::547956940052:role/amplify-ems-dev-134248-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::547956940052:role/amplify-ems-dev-134248-authRole",
+      "Region": "ap-southeast-1",
+      "DeploymentBucketName": "amplify-ems-dev-134248-deployment",
+      "UnauthRoleName": "amplify-ems-dev-134248-unauthRole",
+      "StackName": "amplify-ems-dev-134248",
+      "StackId": "arn:aws:cloudformation:ap-southeast-1:547956940052:stack/amplify-ems-dev-134248/83e1b040-c835-11eb-a0c0-0a07c0be2c3a"
+    },
+    "categories": {
+      "auth": {
+        "emsf2feb8dc": {}
+      }
+    }
+  }
+}

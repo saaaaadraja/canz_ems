@@ -1,0 +1,33 @@
+{
+  "auth": {
+    "emsf2feb8dc": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  },
+  "api": {
+    "ems": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "authemsf2feb8dc"
+            }
+          },
+          "additionalAuthenticationProviders": []
+        }
+      }
+    }
+  },
+  "storage": {
+    "emsS3": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
+    }
+  }
+}

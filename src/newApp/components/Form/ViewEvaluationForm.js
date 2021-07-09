@@ -56,7 +56,8 @@ const clickHandler=()=>{
                   placeholder="Title"
                  value={data.reviewer_title}
                 //  onChange={(e)=>setData({...data,reviewer_title:e.target.value})}
-                  required
+                  required 
+                  disabled
                 />
               </Col>
             </Form.Group>

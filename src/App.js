@@ -45,6 +45,7 @@ const [user,setUser]=useState(null);
 
 
   useEffect(()=>{
+    console.log(window.location.hostname);
     checkUser();
 window.setTimeout(()=>{
 setLoading1(false);
@@ -110,7 +111,7 @@ name.push(data.data.getEmployee.employee_name);
   const {formType}=formState;
  return (
      <div>
-   {loading1?( <p style={{margin:'20% 50%'}}>  Loading... </p>):
+   {loading1?( <p style={{margin:'20% 50%'}}>  Loading...5 </p>):
   ( <>
     {formType==='signedIn' && (
     <div>

@@ -37,7 +37,6 @@ const App = () => {
 // const history=useHistory();
   const [er,setEr]=React.useState([]);
   const [loading1,setLoading1]=React.useState(true);
-  const [auth1,setAuth]=React.useState(false);
     const [loading,setLoading]=React.useState(false);
 const [user,setUser]=useState(null);
   const [formState,setFormState]=useState(initialFormState);
@@ -45,7 +44,6 @@ const [user,setUser]=useState(null);
 
 
   useEffect(()=>{
-    console.log(window.location.hostname);
     checkUser();
 window.setTimeout(()=>{
 setLoading1(false);
@@ -87,6 +85,7 @@ const signIn=async (e)=>{
          setFormState({...formState,formType:'addnew'})
        }
        else{
+         if(window.location.hostname.includes('d55f6nlvhvzfr')){
       Auth.signIn(username,password).then(async(res)=>{
 const info=await Auth.currentUserInfo();
 //  roleArr.push(info.attributes['custom:role']);
@@ -106,12 +105,17 @@ name.push(data.data.getEmployee.employee_name);
         setLoading(false)
     })
   }
+  else{
+ console.log('employee not exist');
+}
+}
+
 }
 
   const {formType}=formState;
  return (
      <div>
-   {loading1?( <p style={{margin:'20% 50%'}}>  Loading...5 </p>):
+   {loading1?( <p style={{margin:'20% 50%'}}>  Loading... </p>):
   ( <>
     {formType==='signedIn' && (
     <div>
@@ -129,7 +133,7 @@ name.push(data.data.getEmployee.employee_name);
             </div>
             <div id="title-div">
                
-              <h4 className="title">Sign In</h4>
+              <h4 className="title">Sign in</h4>
             </div>
 
             <div id="outer-login-form-div">

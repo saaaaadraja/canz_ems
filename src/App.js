@@ -33,13 +33,10 @@ const initialFormState={
 }
 
 const App = () => {
-
-// const history=useHistory();
   const [er,setEr]=React.useState([]);
   const [loading1,setLoading1]=React.useState(true);
     const [loading,setLoading]=React.useState(false);
 const [user,setUser]=useState(null);
-const [employee,setEmployee]=({});
   const [formState,setFormState]=useState(initialFormState);
 
 
@@ -60,12 +57,11 @@ document.title='Employee Managment System';
  id.push(info.attributes.sub); 
  const uId=info.attributes.sub;
  const data= await API.graphql(graphqlOperation(getEmployee,{id:uId}))
- setEmployee(data.data.getEmployee);
 roleArr.push(data.data.getEmployee.role);
 empSupervisor.push(data.data.getEmployee.supervisor);  
 name.push(data.data.getEmployee.employee_name);
-setEmployee(data.data.getEmployee);
-if(employee.company.includes('d55f6nlvhvzfr')){
+
+if(data.data.getEmployee.company.includes('d55f6nlvhvzfr')){
  setFormState({...formState,formType:'signedIn'})
 }
 else{
@@ -100,7 +96,7 @@ roleArr.push(data.data.getEmployee.role);
 empSupervisor.push(data.data.getEmployee.supervisor);
 empSupervisor.push(data.data.getEmployee.supervisor);
 name.push(data.data.getEmployee.employee_name);
- if(employee.company.includes('d55f6nlvhvzfr')){
+ if(data.data.getEmployee.company.includes('d55f6nlvhvzfr')){
     setFormState({...formState,formType:'signedIn'})
  }
   else{

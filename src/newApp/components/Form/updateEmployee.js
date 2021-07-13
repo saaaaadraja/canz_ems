@@ -62,10 +62,15 @@ React.useEffect(()=>{
   }
     }
 React.useEffect(()=>{
- const results = GetEmployee.filter(person =>
-      person.role==='lead'
-    )
-    // console.log(results);
+ const results = GetEmployee.filter(person =>{
+     if(person.role==='lead' && window.location.hostname.toLowerCase().includes(person.company.toLowerCase())){
+       return true
+     }
+     else
+     {
+       return false
+     }
+    })
     setSearchResults(results);
 },[GetEmployee])
 

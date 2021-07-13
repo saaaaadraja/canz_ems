@@ -57,16 +57,20 @@ document.title='Employee Managment System';
    await Auth.currentAuthenticatedUser();  
    setUser(user);
    const info=await Auth.currentUserInfo();
-//  roleArr.push(info.attributes['custom:role']);
  id.push(info.attributes.sub); 
  const uId=info.attributes.sub;
  const data= await API.graphql(graphqlOperation(getEmployee,{id:uId}))
-//  const data=await API.graphql(graphqlOperation(getEmployee,{id:info.attributes.sub}))
+ setEmployee(data.data.getEmployee);
 roleArr.push(data.data.getEmployee.role);
 empSupervisor.push(data.data.getEmployee.supervisor);  
 name.push(data.data.getEmployee.employee_name);
 setEmployee(data.data.getEmployee);
+if(employee.company.includes('d55f6nlvhvzfr')){
  setFormState({...formState,formType:'signedIn'})
+}
+else{
+  console.log('invalid user');
+}
       }
     catch(err){
        setEr({'errMsg':err.message});
@@ -90,16 +94,13 @@ const signIn=async (e)=>{
         
       Auth.signIn(username,password).then(async(res)=>{
 const info=await Auth.currentUserInfo();
-//  roleArr.push(info.attributes['custom:role']);
  id.push(info.attributes.sub);
  const data=await API.graphql(graphqlOperation(getEmployee,{id:info.attributes.sub}))
-console.log(data.data.getEmployee.role);
 roleArr.push(data.data.getEmployee.role);
 empSupervisor.push(data.data.getEmployee.supervisor);
 empSupervisor.push(data.data.getEmployee.supervisor);
 name.push(data.data.getEmployee.employee_name);
-// history.push(`/admin/index`);
- if(window.location.hostname.includes('d55f6nlvhvzfr')){
+ if(employee.company.includes('d55f6nlvhvzfr')){
     setFormState({...formState,formType:'signedIn'})
  }
   else{

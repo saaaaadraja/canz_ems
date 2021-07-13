@@ -70,13 +70,13 @@ const results = getEmployee.filter((person) =>{
  }
     );
     setHrTeam(results);
+    setSearchResults(results);
 },[getEmployee])
     const fetchData= async ()=>{
   try{
  const EmployeeData = await API.graphql(graphqlOperation(listEmployees));
  const EmpData = EmployeeData.data.listEmployees.items;
  setGetEmployee(EmpData);
-  setSearchResults(EmpData);
   }
   catch(error){
     console.log('error on fetching data',error);

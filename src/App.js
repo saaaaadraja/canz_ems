@@ -87,7 +87,7 @@ const signIn=async (e)=>{
          setFormState({...formState,formType:'addnew'})
        }
        else{
-         if(window.location.hostname.includes(employee.company.toLowerCase())){
+        
       Auth.signIn(username,password).then(async(res)=>{
 const info=await Auth.currentUserInfo();
 //  roleArr.push(info.attributes['custom:role']);
@@ -99,17 +99,18 @@ empSupervisor.push(data.data.getEmployee.supervisor);
 empSupervisor.push(data.data.getEmployee.supervisor);
 name.push(data.data.getEmployee.employee_name);
 // history.push(`/admin/index`);
+ if(window.location.hostname.includes(employee.company)){
     setFormState({...formState,formType:'signedIn'})
-
+ }
+  else{
+ console.log('employee not exist');
+}
       })
       .catch((err)=>{
         setEr({'errMsg':err.message});
         setLoading(false)
     })
-  }
-  else{
- console.log('employee not exist');
-}
+ 
 }
 
 }

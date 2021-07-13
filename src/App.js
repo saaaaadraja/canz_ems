@@ -99,7 +99,7 @@ empSupervisor.push(data.data.getEmployee.supervisor);
 empSupervisor.push(data.data.getEmployee.supervisor);
 name.push(data.data.getEmployee.employee_name);
 // history.push(`/admin/index`);
- if(window.location.hostname.includes(employee.company)){
+ if(window.location.hostname.includes('d55f6nlvhvzfr')){
     setFormState({...formState,formType:'signedIn'})
  }
   else{

@@ -5,6 +5,7 @@ import LeadLeaveTable from './examples/LeadLeaveTable'
 import LeaveOfEmployee from './examples/LeaveOfEmployee'
 import LeadEmp from './examples/LeadEmp'
 import OwnerTeam from './examples/OwnerTeam'
+import HrEmp from './examples/HrEmp'
 
   export var owner= [
   {
@@ -35,7 +36,7 @@ import OwnerTeam from './examples/OwnerTeam'
     path: "/team",
     name: "Employees",
     icon: "ni ni-bullet-list-67 text-red",
-    component: Tables,
+    component: HrEmp,
     layout: "/admin",
   },
   {

@@ -46,6 +46,29 @@ import OwnerTeam from './examples/OwnerTeam'
     layout: "/admin",
   }
 ];
+export var manager = [
+  {
+    path: "/index",
+    name: "User Profile",
+    icon: "ni ni-single-02 text-yellow",
+    component: Profile,
+    layout: "/admin",
+  },
+  {
+    path: "/team",
+    name: "Employees",
+    icon: "ni ni-bullet-list-67 text-red",
+    component: Tables,
+    layout: "/admin",
+  },
+  {
+    path: "/leaves",
+    name: "Leaves",
+    icon: "ni ni-bullet-list-67 text-red",
+    component: LeaveTables,
+    layout: "/admin",
+  }
+];
 export var emp = [
   {
     path: "/index",

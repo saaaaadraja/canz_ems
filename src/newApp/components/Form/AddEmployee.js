@@ -273,6 +273,7 @@ setErr('');
                    {/* <option value="admin">Admin</option>  */}
                    <option value="owner">Owner</option>
                    <option value="hr">HR</option>
+                    <option value="manager hr">Manager HR</option>
                   <option value="lead">Lead</option>
                   <option value="employee">Employee</option>
                   

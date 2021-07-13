@@ -61,7 +61,7 @@ roleArr.push(data.data.getEmployee.role);
 empSupervisor.push(data.data.getEmployee.supervisor);  
 name.push(data.data.getEmployee.employee_name);
 
-if(data.data.getEmployee.company.toLowerCase()==='d55f6nlvhvzfr'){
+if(window.location.hostname.toLowerCase().includes(data.data.getEmployee.company.toLowerCase())){
  setFormState({...formState,formType:'signedIn'})
 }
 else{
@@ -96,7 +96,7 @@ roleArr.push(data.data.getEmployee.role);
 empSupervisor.push(data.data.getEmployee.supervisor);
 empSupervisor.push(data.data.getEmployee.supervisor);
 name.push(data.data.getEmployee.employee_name);
- if(data.data.getEmployee.company.toLowerCase()==='d55f6nlvhvzfr'){
+ if(window.location.hostname.toLowerCase().includes(data.data.getEmployee.company.toLowerCase())){
     setFormState({...formState,formType:'signedIn'})
  }
   else{

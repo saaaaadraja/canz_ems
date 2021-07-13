@@ -284,6 +284,7 @@ Storage.put(store.filename,store.file)
                    
                   } 
                   <option value="hr">hr</option> 
+                  <option value="owner">owner</option> 
                 </Form.Control>
               </Col>
             </Form.Group>

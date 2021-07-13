@@ -22,7 +22,7 @@ import {
 // core components
 import Header from "../../components/Headers/Header.js";
 
-const LeaveTables = () => {
+const HrLeaveTables = () => {
 const [leaveResults,setLeaveResults]=React.useState([]);
 
   const history=useHistory();
@@ -30,7 +30,7 @@ const [leaveResults,setLeaveResults]=React.useState([]);
   const fetchData= async ()=>{
   try{
  const LeavesData = await API.graphql(graphqlOperation(listLeaves))
- const data = LeavesData.data.listLeaves.items;
+ const data = LeavesData.data.listLeaves.items
  setGetLeaves(data);
   }
   catch(error){
@@ -42,10 +42,10 @@ fetchData()
 },[])
 
 React.useEffect(()=>{
- const result= getLeaves.filter((leave)=>{
-   
-   if(leave.Lead_Approval==='approved' || leave.supervisor==='hr'){
-         return true
+ const result= getLeaves.filter((leave)=>
+ {
+   if(window.location.hostname.toLowerCase().includes(leave.employee.company.toLowerCase()) && leave.Lead_Approval==='approved' || leave.supervisor==='hr'){
+    return true
    }
    else{
    return false
@@ -91,6 +91,8 @@ history.push(`/empLeave/${id}`)
                 leaveResults.map((leave,i)=>{
               return (<>   
                <tr key={i}>
+                    {/* <td>{leave.id}</td> */}
+                    {/* <td>{leave.employee_id}</td> */}
                     <td>{leave.employee.full_name}</td>
                     <td>{leave.leave}</td>
                     <td>
@@ -200,4 +202,4 @@ history.push(`/empLeave/${id}`)
   );
 };
 
-export default LeaveTables;
+export default HrLeaveTables;

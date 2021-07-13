@@ -333,6 +333,7 @@ setErr('');
                    
                   } 
                   <option value="hr">hr</option> 
+                  <option value="owner">owner</option> 
                 </Form.Control>
               </Col>
             </Form.Group>

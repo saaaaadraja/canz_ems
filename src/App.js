@@ -65,7 +65,8 @@ if(window.location.hostname.toLowerCase().includes(data.data.getEmployee.company
  setFormState({...formState,formType:'signedIn'})
 }
 else{
-  console.log('invalid user');
+  setEr({'errMsg':'user not exist'})
+ setLoading(false);
 }
       }
     catch(err){
@@ -100,7 +101,8 @@ name.push(data.data.getEmployee.employee_name);
     setFormState({...formState,formType:'signedIn'})
  }
   else{
- console.log('employee not exist');
+ setEr({'errMsg':'user not exist'})
+ setLoading(false);
 }
       })
       .catch((err)=>{

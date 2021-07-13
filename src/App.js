@@ -39,6 +39,7 @@ const App = () => {
   const [loading1,setLoading1]=React.useState(true);
     const [loading,setLoading]=React.useState(false);
 const [user,setUser]=useState(null);
+const [employee,setEmployee]=({});
   const [formState,setFormState]=useState(initialFormState);
 
 
@@ -64,6 +65,7 @@ document.title='Employee Managment System';
 roleArr.push(data.data.getEmployee.role);
 empSupervisor.push(data.data.getEmployee.supervisor);  
 name.push(data.data.getEmployee.employee_name);
+setEmployee(data.data.getEmployee);
  setFormState({...formState,formType:'signedIn'})
       }
     catch(err){
@@ -85,7 +87,7 @@ const signIn=async (e)=>{
          setFormState({...formState,formType:'addnew'})
        }
        else{
-         if(window.location.hostname.includes('d55f6nlvhvzfr')){
+         if(window.location.hostname.includes(employee.company.toLowerCase())){
       Auth.signIn(username,password).then(async(res)=>{
 const info=await Auth.currentUserInfo();
 //  roleArr.push(info.attributes['custom:role']);

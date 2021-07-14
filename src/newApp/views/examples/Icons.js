@@ -69,7 +69,7 @@ const Icons = () => {
                       >
                         <div>
                           <i className="ni ni-air-baloon" />
-                          <span>air-baloon</span>
+                          <span>Air-baloon</span>
                         </div>
                       </button>
                     </CopyToClipboard>

@@ -13,8 +13,7 @@ const UpdateEmployee=()=> {
    const [GetEmployee,setGetEmployee]=React.useState([]);
  const [searchResults, setSearchResults] = React.useState([]);
  const history=useHistory();
-   const {id}=useParams();
-const [picture,setPicture]=React.useState('');   
+   const {id}=useParams();   
 const [store,setStore] = React.useState({fileUrl:'',file:'',filename:''});
 
 const handleChange=(e)=>{
@@ -63,7 +62,7 @@ React.useEffect(()=>{
     }
 React.useEffect(()=>{
  const results = GetEmployee.filter(person =>{
-     if(person.role==='lead' && window.location.hostname.toLowerCase().includes(person.company.toLowerCase())){
+     if(person.role==='lead' || person.role==='hr'  && window.location.hostname.toLowerCase().includes(person.company.toLowerCase())){
        return true
      }
      else
@@ -107,22 +106,7 @@ Storage.put(store.filename,store.file)
         <div>
         <h1 id="role-form-title" className="m-2 p-3">Update Employee Details</h1>
         <div id="role-form-outer-div" className="mx-5 px-5">
-          <Form id="form" >
-            {/* <Form.Group as={Row}>
-              <Form.Label column sm={2}>
-               Employee Id
-              </Form.Label>
-              <Col sm={10} className="form-input">
-                <Form.Control
-                  type="Number"
-                  placeholder="Employee Id"
-                  value={employee.employee_id}
-                  onChange={(e)=>setEmployee({...employee,employee_id:e.target.value})}
-                  required
-                />
-              </Col>
-            </Form.Group> */}
-            <Form.Group as={Row}>
+          <Form id="form" ><Form.Group as={Row}>
               <Form.Label column sm={2}>
               user id
               </Form.Label>
@@ -229,7 +213,7 @@ Storage.put(store.filename,store.file)
                    {/* <option value="admin">Admin</option>  */}
                    <option value="owner">Owner</option>
                    <option value="hr">HR</option>
-                   <option value="manager hr">Manager HR</option>
+                    <option value="hr manager">HR Manager</option>
                   <option value="lead">Lead</option>
                   <option value="employee">Employee</option>
                   
@@ -288,7 +272,6 @@ Storage.put(store.filename,store.file)
                     })
                    
                   } 
-                  <option value="hr">hr</option> 
                   <option value="owner">owner</option> 
                 </Form.Control>
               </Col>

@@ -18,7 +18,7 @@ const initialFormState={
   email:'',
   phone_number:'',
    phone2:'',
-  role:'owner',
+  role:'hr',
   address:'',
   supervisor:'hr',
   picture:'',
@@ -70,7 +70,7 @@ React.useEffect(()=>{
     }
 React.useEffect(()=>{
  const results = getEmployee.filter(person =>{
-     if(person.role==='lead' && window.location.hostname.toLowerCase().includes(person.company.toLowerCase())){
+     if(person.role==='lead' || person.role==='hr'  && window.location.hostname.toLowerCase().includes(person.company.toLowerCase())){
        return true
      }
      else
@@ -88,8 +88,8 @@ const history=useHistory();
     setFormState({...formState,[e.target.name]:e.target.value});
   }
 const signUp=async ()=>{
-
-if(formState.username&&formState.full_name && formState.father_name && formState.cnic && formState.password &&formState.email &&formState.role&&formState.supervisor &&formState.phone_number &&formState.salary &&formState.supervisor &&formState.address&&formState.phone2){
+  console.log(formState)
+if(formState.username&&formState.full_name && formState.father_name && formState.cnic && formState.password &&formState.email &&formState.role&&formState.supervisor  && formState.phone_number &&formState.salary &&formState.address&&formState.phone2){
    Storage.put(store.filename,store.file)
   .then((data)=>{
 setStore({fileUrl:'',file:'',filename:''})
@@ -136,7 +136,7 @@ else
  setErr('Please fill the form completely');
  window.setTimeout(()=>{
 setErr('');
- },3000)
+ },5000)
 }
 }
  const {formType}=formState;
@@ -154,7 +154,7 @@ setErr('');
           <Form id="form" >
             <Form.Group as={Row}>
               <Form.Label column sm={2}>
-               User Id
+               user id
               </Form.Label>
               <Col sm={10} className="form-input">
                 <Form.Control
@@ -278,7 +278,7 @@ setErr('');
                    {/* <option value="admin">Admin</option>  */}
                    <option value="owner">Owner</option>
                    <option value="hr">HR</option>
-                    <option value="manager hr">Manager HR</option>
+                   <option value="hr manager">HR Manager</option>
                   <option value="lead">Lead</option>
                   <option value="employee">Employee</option>
                   
@@ -337,8 +337,7 @@ setErr('');
                     })
                    
                   } 
-                  <option value="hr">hr</option> 
-                  <option value="owner">owner</option> 
+                   <option value="owner">owner</option> 
                 </Form.Control>
               </Col>
             </Form.Group>

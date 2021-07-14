@@ -13,7 +13,7 @@ const LeaveForm=()=> {
   console.log('super',superv);
   const userId=id[id.length-1];
     const history=useHistory();
-const [leave,setLeave]=React.useState({employee_id:userId,leave:'',from:'',to:'',Hr_Approval:'pending',Lead_Approval:'pending',remarks:'N/A',type:'sick',supervisor:superv})
+const [leave,setLeave]=React.useState({employee_id:userId,leave:'half leave',from:'',to:'',Hr_Approval:'pending',Lead_Approval:'pending',remarks:'N/A',type:'sick',supervisor:superv})
 
  const creatLeave=async ()=>{
 
@@ -28,7 +28,7 @@ const [leave,setLeave]=React.useState({employee_id:userId,leave:'',from:'',to:''
 
 const clickHandler=async (e)=>{
       e.preventDefault();
-      if(leave.from!=='' && leave.to!==''){
+      if(leave.from && leave.to){
         if(leave.from<=leave.to ){
         creatLeave();
          history.push('/admin/Empleaves');   
@@ -50,28 +50,12 @@ const clickHandler=async (e)=>{
         <h1 id="role-form-title" className="m-2 p-3">Leave Form</h1>
         <div id="role-form-outer-div" className="mx-5 px-5">
           <Form id="form" >
-            {/* <Form.Group as={Row}>
-              <Form.Label column sm={2}>
-               Employee Id
-              </Form.Label>
-              <Col sm={10} className="form-input">
-                <Form.Control
-                  type="text"
-                  placeholder="Employee Id"
-                  value={leave.employee_id}
-                  // onChange={(e)=>setLeave({...leave,employee_id:parseInt(e.target.value)})}
-                  disabled
-                  required
-                />
-              </Col>
-            </Form.Group> */}
             <Form.Group as={Row} >
               <Form.Label column sm={2}>
               Leave
              </Form.Label>
               <Col sm={10} className="form-input">
                 <Form.Control as="select" onChange={(e)=>setLeave({...leave,leave:e.target.value})} required>
-                   {/* <option value="admin">Admin</option>  */}
                    <option value="half leave">Half Leave</option>
                   <option value="full leave">Full Leave</option>
                 </Form.Control>
@@ -140,7 +124,6 @@ const clickHandler=async (e)=>{
                   type="text"
                   placeholder="Hr remarks"
                   value={leave.remarks}
-                  // onChange={(e)=>setLeave({...leave,remarks:e.target.value})}
                   required
                   disabled
                 />
@@ -152,7 +135,6 @@ const clickHandler=async (e)=>{
              </Form.Label>
               <Col sm={10} className="form-input">
                 <Form.Control as="select" onChange={(e)=>setLeave({...leave,type:e.target.value})} required>
-                   {/* <option value="admin">Admin</option>  */}
                    <option value="sick">Sick</option>
                   <option value="urgent work">Urgent Work</option>
                 </Form.Control>

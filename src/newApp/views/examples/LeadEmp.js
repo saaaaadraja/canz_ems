@@ -33,29 +33,19 @@ import Header from "../../components/Headers/Header";
 import {getEmployee, listEmployees} from '../../../graphql/queries'
 import {useHistory} from 'react-router'
 import {id} from '../../../App'
+import {emp_full_name} from '../../../App'
 
 const LeadEmp = () => {
   const history=useHistory();
 const userId=id[id.length-1];
-//const [searchTerm, setSearchTerm] = React.useState("");
+
 const [GetEmployee,setGetEmployee]=React.useState([]);
  const [searchResults, setSearchResults] = React.useState([]);
- const [fullName, setFullName] = React.useState('');
+ const fullName = emp_full_name[emp_full_name.length-1];
 
 React.useEffect(()=>{
-       fetchEmp();
        fetchData();
     },[]);
-
-const fetchEmp= async ()=>{
-  try{ 
-       const EmployeeData = await API.graphql(graphqlOperation(getEmployee,{id:userId}));
-      setFullName(EmployeeData.data.getEmployee.full_name);
-  }
-  catch(error){
-    console.log('error on fetching data',error);
-  }
-    }
     const fetchData= async ()=>{
   try{ 
        const EmployeeData = await API.graphql(graphqlOperation(listEmployees));
@@ -70,7 +60,6 @@ React.useEffect(()=>{
  const results = GetEmployee.filter(person =>
       person.supervisor.toLowerCase()===fullName.toLowerCase()
     )
-    // console.log(results);
     setSearchResults(results);
 },[GetEmployee])
 

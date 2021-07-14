@@ -46,7 +46,10 @@ const [GetEmployee,setGetEmployee]=React.useState([]);
 React.useEffect(()=>{
        fetchData();
     },[]);
-    const fetchData= async ()=>{
+
+    //Function for Fetching employee list from database
+
+  const fetchData= async ()=>{
   try{ 
        const EmployeeData = await API.graphql(graphqlOperation(listEmployees));
       const EmpData = EmployeeData.data.listEmployees.items;
@@ -55,7 +58,10 @@ React.useEffect(()=>{
   catch(error){
     console.log('error on fetching data',error);
   }
-    }
+ }
+
+ //Filter Lead Team From Employees List
+
 React.useEffect(()=>{
  const results = GetEmployee.filter(person =>
       person.supervisor.toLowerCase()===fullName.toLowerCase()
@@ -63,9 +69,12 @@ React.useEffect(()=>{
     setSearchResults(results);
 },[GetEmployee])
 
+//Pushing Evaluation Form Route
+
 const clickHandler=(id)=>{
   history.push(`/evaluationform/${id}`);
 }
+
   return (
     <>
       <Header />
@@ -89,7 +98,7 @@ const clickHandler=(id)=>{
                     <th scope="col">Email</th>
                     <th scope="col">Phone1</th>
                     <th scope="col">Phone2</th>
-                     <th scope="col">Address</th>
+                    <th scope="col">Address</th>
                     <th scope="col">Role</th>
                     <th scope="col">Supervisor</th>
                     <th scope="col">Salary</th>

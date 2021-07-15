@@ -23,7 +23,7 @@ const initialFormState={
   supervisor:'hr',
   picture:'',
   salary:'',
-  company:'',
+  company:'canz studios',
   blood_group:'',
   transport_mode:'',
   vichel_no:'',
@@ -351,8 +351,9 @@ setErr('');
                   name='company'
                   placeholder="company name"
                   value={formState.company}
-                   onChange={onChange}
+                  //  onChange={onChange}
                   required
+                  disabled
                 />
               </Col>
             </Form.Group>

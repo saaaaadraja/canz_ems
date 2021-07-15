@@ -19,6 +19,7 @@ body {
 #logo-img {
   width: 100%;
   margin: 10% auto 10%;
+  border-radius: 50%;
 }
 
 #logo-div {

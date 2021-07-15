@@ -25,6 +25,7 @@ body {
 #logo-div {
   width: 50%;
   height: 50%;
+  border-radius: 50%;
   margin: 0 auto;
   position: relative;
 }

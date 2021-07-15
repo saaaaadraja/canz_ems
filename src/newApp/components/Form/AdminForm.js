@@ -25,7 +25,7 @@ const initialFormState={
   supervisor:'owner',
   picture:'',
   salary:'',
-  company:'',
+  company:'Canz Studios',
   blood_group:'',
   transport_mode:'',
   vichel_no:'',
@@ -72,7 +72,7 @@ React.useEffect(()=>{
     }
 React.useEffect(()=>{
  const results = getEmployee.filter(person =>{
-     if(person.role==='lead' || person.role==='hr' && window.location.hostname.toLowerCase().includes(person.company.toLowerCase())){
+     if(person.role==='lead' && person.company.toLowerCase()==='canz studios' || person.role==='hr' && person.company.toLowerCase()==='canz studios' ){
        return true
      }
      else
@@ -128,7 +128,7 @@ username:formState.username,
   UserID.push(data.userSub);
 
 window.setTimeout(()=>{
- setFormState({...formState,formType:'submitted'})
+ window.location.reload();
 },2000)
 }
   ).catch((err)=>{
@@ -149,7 +149,7 @@ setErr('');
  const {formType}=formState;
 
  const cancelHandler=()=>{
-   setFormState({...formState,formType:'submitted'})
+  window.location.reload();
  }
 
     return (<>
@@ -358,7 +358,7 @@ setErr('');
                   name='company'
                   placeholder="company name"
                   value={formState.company}
-                   onChange={onChange}
+                  //  onChange={onChange}
                   required
                 />
               </Col>
@@ -510,11 +510,6 @@ setErr('');
       </div>
       </>
          )
-}
-{
-  formType==='submitted'&&(<><div>
-    <App/>
-    </div></>)
 }
 </div>
    </> )

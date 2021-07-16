@@ -81,12 +81,12 @@ Auth.currentAuthenticatedUser()
                <p className="alert">{err}</p>
             <Form.Group as={Row} id="form-submit-button" >
               <Col sm={{ span: 10, offset:2}}>
-                <Button disabled={loading?'true':'false'} onClick={clickHandler}>submit</Button>
+                <Button disabled={loading?'true':''} onClick={clickHandler}>submit</Button>
               </Col>
             </Form.Group>
             <Form.Group as={Row} id="form-submit-button" >
               <Col sm={{ span: 10, offset:2}} >
-                 <Button className='bg-light' disabled={loading?'true':'false'} onClick={cancelHandler}>Cancel</Button>
+                 <Button className='bg-light' disabled={loading?'true':''} onClick={cancelHandler}>Cancel</Button>
               </Col>
             </Form.Group>
             </div>

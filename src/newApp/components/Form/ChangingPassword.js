@@ -18,7 +18,7 @@ Auth.currentAuthenticatedUser()
         console.log(data);
         window.setTimeout(()=>{
              history.push('/');
-        },2000)
+        },3000)
     })
     .catch(err => console.log(err));
   }

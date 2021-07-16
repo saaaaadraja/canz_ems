@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState} from 'react'
 import { Form, Button, Col, Row } from "react-bootstrap";
 import Amplify,{Auth,Storage}from "aws-amplify";
 import {useHistory} from 'react-router'
@@ -8,6 +8,8 @@ import 'react-phone-input-2/lib/style.css'
 import {API,graphqlOperation} from "aws-amplify";
 import {listEmployees} from '../../../graphql/queries'
 Amplify.configure(awsconfig);
+
+
 const initialFormState={
   employee_Id:'id_lads',
   username:'',

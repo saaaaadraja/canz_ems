@@ -39,7 +39,7 @@ function Index() {
       <Route exact path='/leadLeaveEdit/:id'><EditLeadLeave/></Route>
       <Route exact path = '/user/:id'><UserProfile/></Route>
       <Route exact path='/:id'><UpdateEmployee/></Route>
-       <Route exact path = '/changepassword'><ChangingPassword/></Route>
+       <Route exact path ='/changepassword'><ChangingPassword/></Route>
       <Route  path="/admin" render={(props) =>( <AdminLayout {...props} />)} />
       <Route  path="/auth" render={(props) => <AuthLayout {...props} />} />
       <Redirect from='/' to='/admin/index'/>

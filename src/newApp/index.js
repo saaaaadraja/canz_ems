@@ -28,7 +28,7 @@ function Index() {
  <Router>
     <Switch>
       <Route exact path = '/evaluationform/:id'><EvaluationForm/></Route>
-        <Route exact path = '/warning/:id'><Warning/></Route>
+      <Route exact path = '/warning/:id'><Warning/></Route>
       <Route exact path='/leaveForm'><LeaveForm/></Route>
        <Route exact path = '/user/:id/evaluation/:evaId'><ViewEvaluationForm/></Route>
       <Route exact path='/editjobhistory/:id'><Jobs/></Route>

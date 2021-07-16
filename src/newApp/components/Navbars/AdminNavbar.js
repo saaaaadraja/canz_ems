@@ -61,6 +61,10 @@ const data=await API.graphql(graphqlOperation(getEmployee,{id:id[id.length-1]}))
                   <i className="ni ni-single-02" />
                   <span>My profile</span>
                 </DropdownItem>
+                <DropdownItem to="/changepassword" tag={Link}>
+                  <i className="ni ni-single-01" />
+                  <span>Change Password</span>
+                </DropdownItem>
                 <DropdownItem divider />
                 <DropdownItem href="#pablo" onClick={()=> {
                   Auth.signOut();

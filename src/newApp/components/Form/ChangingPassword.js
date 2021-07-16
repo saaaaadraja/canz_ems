@@ -5,14 +5,14 @@ import { useHistory } from 'react-router';
 
 const ChangingPassword=()=>{
     const history = useHistory();
-    const [changes,setChanges]= useState({userId:'',oldPassword:'',newPassword:''})
+    const [changes,setChanges]= useState({oldPassword:'',newPassword:''})
 
 
   const  clickHandler=(e)=>{
       e.preventDefault();
 Auth.currentAuthenticatedUser()
     .then(user => {
-        return Auth.changePassword(changes.userId, changes.oldPassword, changes.newPassword);
+        return Auth.changePassword(user, changes.oldPassword, changes.newPassword);
     })
     .then(data =>{ 
         console.log(data);
@@ -36,25 +36,7 @@ Auth.currentAuthenticatedUser()
           <h1 id="role-form-title" className="m-2 p-3">Changing Password</h1>
         <div id="role-form-outer-div" className="mx-5 px-5">
           <Form id="form" >
-
-            <Form.Group as={Row}>
-              <Form.Label column sm={2}>
-               user id
-              </Form.Label>
-              <Col sm={10} className="form-input">
-                <Form.Control
-                  type="text"
-                  name='username'
-                  placeholder="user id"
-                  value={changes.userId}
-                  onChange={onChange}
-                  required
-                />
-              </Col>
-            </Form.Group>
-
-
-  <Form.Group as={Row}>
+         <Form.Group as={Row}>
               <Form.Label column sm={2}>
                old password
               </Form.Label>

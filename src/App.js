@@ -35,7 +35,6 @@ const initialFormState={
 const App = () => {
   const [er,setEr]=React.useState([]);
   const [loading1,setLoading1]=React.useState(true);
-  const [auth1,setAuth]=React.useState(false);
     const [loading,setLoading]=React.useState(false);
 const [user,setUser]=useState(null);
   const [formState,setFormState]=useState(initialFormState);

@@ -9,7 +9,7 @@ const ChangingPassword=()=>{
 
 
   const  clickHandler=(e)=>{
-      e.preventDefault();
+       e.persist();
 Auth.currentAuthenticatedUser()
     .then(user => {
         return Auth.changePassword(user, changes.oldPassword, changes.newPassword);
@@ -69,7 +69,7 @@ Auth.currentAuthenticatedUser()
             </Form.Group>
 
             <div className='px-5'  style={{display:'flex',flexDirection:'row',gap:'3vw',marginLeft:'13vw'}}>
-               <p className="alert">{Err}</p>
+               {/* <p className="alert">{Err}</p> */}
             <Form.Group as={Row} id="form-submit-button" >
               <Col sm={{ span: 10, offset:2}}>
                 <Button  onClick={clickHandler}>submit</Button>

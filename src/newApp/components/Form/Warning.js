@@ -93,13 +93,13 @@ const clickHandler=async (e)=>{
               <Col sm={{ span: 10, offset:2}}>
                  <Button disabled={loading?'true':''}  onClick={clickHandler}>Submit</Button>
               </Col>
-            </Form.Group>
+                    </Form.Group>
             <Form.Group as={Row} id="form-submit-button" >
               <Col sm={{ span: 10, offset:2}} >
                  <Button className='bg-light' disabled={loading?'true':''}  onClick={cancelHandler}>Cancel</Button>
               </Col>
             </Form.Group>
-            </div>
+    </div>
              {Err && (<p className="alert">Error in filling the form !</p>)}
           </Form>
       </div>

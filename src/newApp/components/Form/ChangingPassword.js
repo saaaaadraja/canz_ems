@@ -4,6 +4,9 @@ import { Auth } from 'aws-amplify';
 import { useHistory } from 'react-router';
 
 const ChangingPassword=()=>{
+
+    const [err,setErr]=useState('');
+       const [loading,setLoading]=useState(false);
     const history = useHistory();
     const [changes,setChanges]= useState({oldPassword:'',newPassword:''})
 
@@ -15,12 +18,18 @@ Auth.currentAuthenticatedUser()
         return Auth.changePassword(user, changes.oldPassword, changes.newPassword);
     })
     .then(data =>{ 
-        console.log(data);
+         setLoading(true);
         window.setTimeout(()=>{
+            setLoading(false);
              history.push('/');
         },3000)
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+       setErr(err.message);
+       window.setTimeout(()=>{
+             setErr('');
+        },3000)
+    });
   }
   const onChange=(e)=>{
  setChanges({...changes,[e.target.name]:e.target.value});
@@ -69,15 +78,15 @@ Auth.currentAuthenticatedUser()
             </Form.Group>
 
             <div className='px-5'  style={{display:'flex',flexDirection:'row',gap:'3vw',marginLeft:'13vw'}}>
-               {/* <p className="alert">{Err}</p> */}
+               <p className="alert">{err}</p>
             <Form.Group as={Row} id="form-submit-button" >
               <Col sm={{ span: 10, offset:2}}>
-                <Button  onClick={clickHandler}>submit</Button>
+                <Button disabled={loading?'true':'false'} onClick={clickHandler}>submit</Button>
               </Col>
             </Form.Group>
             <Form.Group as={Row} id="form-submit-button" >
               <Col sm={{ span: 10, offset:2}} >
-                 <Button className='bg-light'  onClick={cancelHandler}>Cancel</Button>
+                 <Button className='bg-light' disabled={loading?'true':'false'} onClick={cancelHandler}>Cancel</Button>
               </Col>
             </Form.Group>
             </div>

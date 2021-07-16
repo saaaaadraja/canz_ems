@@ -62,7 +62,7 @@ const data=await API.graphql(graphqlOperation(getEmployee,{id:id[id.length-1]}))
                   <span>My profile</span>
                 </DropdownItem>
                 <DropdownItem to="/change/changepassword" tag={Link}>
-                  <i className="ni ni-single-02" />
+                  <i className="ni ni-lock-circle-open" />
                   <span>Change Password</span>
                 </DropdownItem>
                 <DropdownItem divider />

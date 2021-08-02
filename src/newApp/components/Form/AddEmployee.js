@@ -168,7 +168,7 @@ const readExcel=(file)=>{
    promise.then((d)=>{
      d.map( async(emp)=>{
 await Auth.signUp({
-username:emp.username,
+username:emp.userid,
   password:emp.password,
   attributes:{
     email:emp.email,

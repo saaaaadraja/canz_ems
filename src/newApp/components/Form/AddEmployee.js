@@ -7,6 +7,7 @@ import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import {API,graphqlOperation} from "aws-amplify";
 import {listEmployees} from '../../../graphql/queries'
+import XLSX from 'xlsx'
 Amplify.configure(awsconfig);
 
 
@@ -91,7 +92,7 @@ const history=useHistory();
   }
 const signUp=async ()=>{
   console.log(formState)
-if(formState.username&&formState.full_name && formState.father_name && formState.cnic && formState.password &&formState.email &&formState.role&&formState.supervisor  && formState.phone_number &&formState.salary &&formState.address&&formState.phone2){
+if(formState.username&&formState.full_name && formState.father_name && formState.cnic && formState.password &&formState.email &&formState.role&&formState.supervisor  && formState.phone_number && formState.company &&formState.address&&formState.status){
    Storage.put(store.filename,store.file)
   .then((data)=>{
 setStore({fileUrl:'',file:'',filename:''})
@@ -147,6 +148,68 @@ setErr('');
  const cancelHandler=()=>{
    history.push('/admin/team');
  }
+const readExcel=(file)=>{
+   const promise = new Promise((resolve,reject)=>{
+     const fileReader = new FileReader();
+     fileReader.readAsArrayBuffer(file);
+
+     fileReader.onload=(e)=>{
+       const bufferArray=e.target.result;
+       const wb = XLSX.read(bufferArray,{type:'buffer'});
+       const wbname=wb.SheetNames[0];
+       const ws = wb.Sheets[wbname];
+       const data = XLSX.utils.sheet_to_json(ws);
+       resolve(data);
+     }
+     fileReader.onerror=(error)=>{
+       reject(error);
+     }
+   })
+   promise.then((d)=>{
+     d.map( async(emp)=>{
+await Auth.signUp({
+username:emp.username,
+  password:emp.password,
+  attributes:{
+    email:emp.email,
+    phone_number:`+${emp.phone1}`,
+    'custom:role':emp.role,
+    'custom:full_name':emp.fullname,
+    'custom:father_name':emp.father_name,
+    'custom:cnic':emp.cnic,
+   'custom:employee_Id':emp.id,
+   'custom:salary':emp.salary,
+   'custom:supervisor':emp.supervisor,
+   'custom:address':emp.address,
+   'custom:picture':'',
+   'custom:phone2':`+${emp.phone2}`,
+   'custom:company':emp.company,
+   'custom:blood_group':emp.blood_group,
+   'custom:transport_mode':emp.trans_mode,
+   'custom:vichel_no':emp.vichel_no,
+   'custom:dob':emp.dob,
+   'custom:doj':emp.doj,
+   'custom:status':emp.status,
+   'custom:end_date':emp.end_date,
+   'custom:last_degree':emp.last_degree,
+   'custom:institute':emp.institute,
+  }
+}).then((data)=>{
+  console.log('opration successfull');
+  UserID.push(data.userSub);
+setLoading(true);
+window.setTimeout(()=>{
+  setLoading(false);
+history.push(`/editjobhistory/${UserID[UserID.length-1]}`);
+},2000)
+}
+  ).catch((err)=>
+  {
+    setErr(err.message)
+  });
+     })
+   })
+ }
 
     return (<>
         <div>
@@ -157,7 +220,7 @@ setErr('');
           <Form id="form" >
             <Form.Group as={Row}>
               <Form.Label column sm={2}>
-               user id
+               user id *
               </Form.Label>
               <Col sm={10} className="form-input">
                 <Form.Control
@@ -172,7 +235,7 @@ setErr('');
             </Form.Group>
             <Form.Group as={Row}>
               <Form.Label column sm={2}>
-                Email
+                Email *
               </Form.Label>
               <Col sm={10} className="form-input">
                 <Form.Control
@@ -187,7 +250,7 @@ setErr('');
             </Form.Group>
             <Form.Group as={Row}>
               <Form.Label column sm={2}>
-                Password
+                Password *
               </Form.Label>
               <Col sm={10} className="form-input">
                 <Form.Control
@@ -202,7 +265,7 @@ setErr('');
             </Form.Group>
             <Form.Group as={Row}>
               <Form.Label column sm={2}>
-              Full Name
+              Full Name *
               </Form.Label>
               <Col sm={10} className="form-input">
                 <Form.Control
@@ -217,7 +280,7 @@ setErr('');
             </Form.Group>
             <Form.Group as={Row}>
               <Form.Label column sm={2}>
-               Father Name
+               Father Name *
               </Form.Label>
               <Col sm={10} className="form-input">
                 <Form.Control
@@ -232,7 +295,7 @@ setErr('');
             </Form.Group>
             <Form.Group as={Row}>
               <Form.Label column sm={2}>
-             CNIC
+             CNIC *
               </Form.Label>
               <Col sm={10} className="form-input">
                 <Form.Control
@@ -247,7 +310,7 @@ setErr('');
             </Form.Group>
              <Form.Group as={Row}>
               <Form.Label column sm={2}>
-               Employee Address
+               Employee Address *
               </Form.Label>
               <Col sm={10} className="form-input">
                 <Form.Control
@@ -274,7 +337,7 @@ setErr('');
              </Form.Group>
             <Form.Group as={Row} >
               <Form.Label column sm={2}>
-                Role
+                Role *
              </Form.Label>
               <Col sm={10} className="form-input">
                 <Form.Control as="select" onChange={(e)=>setFormState({...formState,role:e.target.value})} required>
@@ -290,7 +353,7 @@ setErr('');
             </Form.Group>
             <Form.Group as={Row}>
               <Form.Label column sm={2}>
-                Phone#1
+                Phone#1 *
               </Form.Label>
               <Col sm={10} className="form-input">
                 <PhoneInput
@@ -330,7 +393,7 @@ setErr('');
             </Form.Group>
             <Form.Group as={Row} >
               <Form.Label column sm={2}>
-                supervisor
+                supervisor *
              </Form.Label>
               <Col sm={10} className="form-input">
                 <Form.Control as="select" onChange={(e)=>{setFormState({...formState,supervisor:e.target.value});}} required>
@@ -346,7 +409,7 @@ setErr('');
             </Form.Group>
             <Form.Group as={Row}>
               <Form.Label column sm={2}>
-               Company Name
+               Company Name *
               </Form.Label>
               <Col sm={10} className="form-input">
                 <Form.Control
@@ -422,7 +485,7 @@ setErr('');
             </Form.Group>
             <Form.Group as={Row} >
               <Form.Label column sm={2}>
-                Status
+                Status *
              </Form.Label>
               <Col sm={10} className="form-input">
                 <Form.Control as="select" value={formState.status} onChange={(e)=>setFormState({...formState,status:e.target.value})}required>
@@ -502,6 +565,19 @@ setErr('');
                  <Button className='bg-light' disabled={loading?'true':''}   onClick={cancelHandler}>Cancel</Button>
               </Col>
             </Form.Group>
+            <Form.Group as={Row}>
+              <Col sm={{ span: 10, offset:2}} className="form-input">
+                <input
+                  type="file"
+                  
+                   onChange={(e)=>{
+                     const file = e.target.files[0];
+                     readExcel(file);
+                   }}
+                  required
+                />
+              </Col>
+             </Form.Group>
             </div>
             </Form>
       </div>

@@ -73,8 +73,6 @@ history.push(`/empLeave/${id}`)
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light">
                   <tr>
-                    {/* <th scope="col">Leave Id</th> */}
-                    {/* <th scope="col">Employee Id</th> */}
                     <th scope="col">Employee Name</th>
                     <th scope="col">Leave</th>
                     <th scope="col">From</th>

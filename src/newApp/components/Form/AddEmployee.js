@@ -91,8 +91,8 @@ const history=useHistory();
     setFormState({...formState,[e.target.name]:e.target.value});
   }
 const signUp=async ()=>{
-  console.log(formState)
 if(formState.username&&formState.full_name && formState.father_name && formState.cnic && formState.password &&formState.email &&formState.role&&formState.supervisor  && formState.phone_number && formState.company &&formState.address&&formState.status){
+  if(formState.doj<formState.end_date){
    Storage.put(store.filename,store.file)
   .then((data)=>{
 setStore({fileUrl:'',file:'',filename:''})
@@ -134,6 +134,10 @@ history.push(`/editjobhistory/${UserID[UserID.length-1]}`);
 },2000)
 }
   ).catch((err)=>setErr(err.message));
+}
+else{
+  setErr('date of joing should be lesser than left date / termination date');
+}
 }
 else
 {

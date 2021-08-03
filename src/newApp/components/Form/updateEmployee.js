@@ -92,9 +92,12 @@ Storage.put(store.filename,store.file)
    const updateUser=async ()=>{
   try{
     const updateData={id:employee.id,employee_id:employee.employee_id,employee_name:employee.employee_name,full_name:employee.full_name,father_name:employee.father_name,cnic:employee.cnic,employee_addr:employee.employee_addr,employee_email:employee.employee_email,employee_phone1:employee.employee_phone1,employee_phone2:employee.employee_phone2,employee_password:employee.employee_password,employee_pic:store.filename,employee_salary:employee.employee_salary,role:employee.role,supervisor:employee.supervisor,company:employee.company,blood_group:employee.blood_group,dob:employee.dob,doj:employee.doj,status:employee.status,end_date:employee.end_date,last_degree:employee.last_degree,institute:employee.institute,transport_mode:employee.transport_mode,vichel_no:employee.vichel_no}
-    
+    if(employee.doj<employee.end_date){
      await API.graphql(graphqlOperation(updateEmployee,{input:updateData}))
-     console.log('operation successful');
+    }
+    else{
+      console.log('joining date should lesser than end date');
+    }
   }
   catch(error){
     console.log(error);

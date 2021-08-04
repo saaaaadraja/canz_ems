@@ -94,7 +94,7 @@ history.push(`/warning/${id}`);
 //   console.log(pageNumbers);
 // }
 
-const paginate=(pageNumber)=>setCurrentPage(pageNumber);
+// const paginate=(pageNumber)=>setCurrentPage(pageNumber);
   return (
     <>
       <Header />

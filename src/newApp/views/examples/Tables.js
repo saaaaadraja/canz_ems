@@ -86,12 +86,12 @@ history.push(`/warning/${id}`);
 const [IsSorted,setIsSorted]=React.useState(false);
 const sortTable=()=>{
   if(IsSorted){
-  searchResults.sort((a,b)=>a.full_name - b.full_name);
+  searchResults.sort();
   console.log(searchResults);
   setIsSorted(!IsSorted);
   }
   else{
-  searchResults.sort((a,b)=>b.full_name - a.full_name);
+  searchResults.reverse();
   console.log(searchResults);
    setIsSorted(!IsSorted);
   }

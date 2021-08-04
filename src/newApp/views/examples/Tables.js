@@ -61,9 +61,11 @@ React.useEffect(()=>{
  const EmpData = EmployeeData.data.listEmployees.items;
  setGetEmployee(EmpData);
   setSearchResults(EmpData);
+  console.log(searchResults);
   searchResults.sort((a,b)=>{
     return a.full_name - b.full_name;
   });
+  console.log(searchResults);
   }
   catch(error){
     console.log('error on fetching data',error);

@@ -61,6 +61,7 @@ React.useEffect(()=>{
  const EmpData = EmployeeData.data.listEmployees.items;
  setGetEmployee(EmpData);
   setSearchResults(EmpData);
+  searchResults.sort();
   }
   catch(error){
     console.log('error on fetching data',error);
@@ -86,13 +87,11 @@ history.push(`/warning/${id}`);
 const [IsSorted,setIsSorted]=React.useState(false);
 const sortTable=()=>{
   if(IsSorted){
-  searchResults.sort();
-  console.log(searchResults);
+  searchResults.reverse();
   setIsSorted(!IsSorted);
   }
   else{
   searchResults.reverse();
-  console.log(searchResults);
    setIsSorted(!IsSorted);
   }
 }

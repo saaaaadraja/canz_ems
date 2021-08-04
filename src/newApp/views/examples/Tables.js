@@ -170,7 +170,7 @@ const paginate=(pageNumber)=>setCurrentPage(pageNumber);
                 </thead>
                 <tbody>
                   {
-                searchResults.map((employee,i)=>{
+                currentPosts.map((employee,i)=>{
               return (<>
                <tr>
                     <td style={{fontSize:'12px',fontWeight:'900'}} className={`text-white ${employee.status==='active'?'bg-success':'bg-danger'}`}>{employee.status}</td>

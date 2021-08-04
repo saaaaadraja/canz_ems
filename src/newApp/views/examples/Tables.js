@@ -1,7 +1,6 @@
 import React from "react";
 // reactstrap components
 import {
-  Badge,
   Card,
   CardHeader,
   CardFooter,
@@ -10,19 +9,14 @@ import {
   UncontrolledDropdown,
   DropdownToggle,
   Media,
-  Pagination,
-  PaginationItem,
-  PaginationLink,
   // Progress,
   Table,
   Container,
   Row,
   InputGroupText,
-  Form,
   InputGroup,
   InputGroupAddon,
   Input,
-  FormGroup
     // UncontrolledTooltip,
 } from "reactstrap";
 import 'react-bootstrap';
@@ -34,7 +28,8 @@ import {useHistory} from 'react-router'
 
 
 const Tables = () => {
-
+const [currentPage,setCurrentPage]=React.useState(1);
+const [postPerPage,setPostPerPage]=React.useState(1);
 const [searchTerm, setSearchTerm] = React.useState("");
  const [searchResults, setSearchResults] = React.useState([]);
 React.useEffect(()=>{
@@ -86,7 +81,10 @@ history.push(`/warning/${id}`);
     e.preventDefault();
     history.push('/addemployee');
   }
-
+//Get Current Posts
+  const indexOfLastPost=currentPage*postPerPage;
+  const indexOfFirstPost=indexOfLastPost-postPerPage;
+const currentPosts = searchResults.slice(indexOfFirstPost,indexOfLastPost);
 
   return (
     <>
@@ -139,9 +137,8 @@ history.push(`/warning/${id}`);
                 </thead>
                 <tbody>
                   {
-                 searchResults.map((employee,i)=>{
+                currentPosts.map((employee,i)=>{
               return (<>
-              
                <tr>
                     <td style={{fontSize:'12px',fontWeight:'900'}} className={`text-white ${employee.status==='active'?'bg-success':'bg-danger'}`}>{employee.status}</td>
                   <th scope="row">

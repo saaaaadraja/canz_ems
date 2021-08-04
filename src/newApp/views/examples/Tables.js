@@ -53,6 +53,16 @@ React.useEffect(()=>{
 React.useEffect(()=>{
        fetchData();
       
+  const compare=( a, b )=> {
+  if ( a.full_name < b.full_name ){
+    return -1;
+  }
+  if ( a.full_name > b.full_name ){
+    return 1;
+  }
+  return 0;
+}
+  searchResults.sort(compare);
     },[]);
 
     const fetchData= async ()=>{
@@ -87,19 +97,7 @@ history.push(`/warning/${id}`);
 const [IsSorted,setIsSorted]=React.useState(false);
 const sortTable=()=>{
   if(IsSorted){
-    console.log(searchResults);
 
-  const compare=( a, b )=> {
-  if ( a.full_name < b.full_name ){
-    return -1;
-  }
-  if ( a.full_name > b.full_name ){
-    return 1;
-  }
-  return 0;
-}
-  searchResults.sort(compare);
-  console.log(searchResults);
   searchResults.reverse();
   setIsSorted(!IsSorted);
   }

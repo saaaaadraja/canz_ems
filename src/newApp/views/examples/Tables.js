@@ -52,17 +52,6 @@ React.useEffect(()=>{
   const [getEmployee,setGetEmployee]=React.useState([]);
 React.useEffect(()=>{
        fetchData();
-      
-  const compare=( a, b )=> {
-  if ( a.full_name < b.full_name ){
-    return -1;
-  }
-  if ( a.full_name > b.full_name ){
-    return 1;
-  }
-  return 0;
-}
-  searchResults.sort(compare);
     },[]);
 
     const fetchData= async ()=>{
@@ -94,10 +83,19 @@ history.push(`/warning/${id}`);
     history.push('/addemployee');
   }
 //sorting table by full name
-const [IsSorted,setIsSorted]=React.useState(false);
+const [IsSorted,setIsSorted]=React.useState(true);
 const sortTable=()=>{
   if(IsSorted){
-
+  const compare=( a, b )=> {
+  if ( a.full_name < b.full_name ){
+    return -1;
+  }
+  if ( a.full_name > b.full_name ){
+    return 1;
+  }
+  return 0;
+}
+  searchResults.sort(compare);
   searchResults.reverse();
   setIsSorted(!IsSorted);
   }

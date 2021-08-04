@@ -17,6 +17,7 @@ import {
   InputGroup,
   InputGroupAddon,
   Input,
+  PaginationItem,
     // UncontrolledTooltip,
 } from "reactstrap";
 import 'react-bootstrap';
@@ -87,9 +88,13 @@ history.push(`/warning/${id}`);
 const currentPosts = searchResults.slice(indexOfFirstPost,indexOfLastPost);
 //pagination
 const pageNumbers=[];
-for(let i=1;i<=Math.ceil(searchResults.length/postsPerPage);i++){
+const totalPosts=searchResults.length;
+for(let i=1;i<=Math.ceil(totalPosts/postsPerPage);i++){
   pageNumbers.push(i);
+  console.log(pageNumbers);
 }
+
+const paginate=(pageNumber)=>setCurrentPage(pageNumber);
   return (
     <>
       <Header />
@@ -237,8 +242,8 @@ for(let i=1;i<=Math.ceil(searchResults.length/postsPerPage);i++){
                   <ul className='pagination'>
                     {
                       pageNumbers.map((number)=>{
-                        <li key={number} className='page-item'>
-                          <a href="!#" className='page-link'>
+                       return <li key={number} className='page-item'>
+                          <a onClick={()=>paginate(number)} href="!#" className='page-link'>
                           {number}
                           </a>
                         </li>

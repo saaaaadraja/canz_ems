@@ -1,5 +1,6 @@
 import React from "react";
 // reactstrap components
+import {FaArrowsAltV} from 'react-icons/fa';
 import {
   Card,
   CardHeader,
@@ -145,7 +146,7 @@ const sortTable=()=>{
                     <th scope="col">Status</th>
                     <th scope="col">Picture</th>
                     <th scope="col">user id</th>
-                     <th scope="col" onClick={()=>sortTable()}>Full Name</th>
+                     <th scope="col" onClick={()=>sortTable()}>Full Name <FaArrowsAltV/></th>
                       <th scope="col">Father Name</th>
                        <th scope="col">CNIC</th>
                     <th scope="col">Email</th>

@@ -29,7 +29,7 @@ import {useHistory} from 'react-router'
 
 const Tables = () => {
 const [currentPage,setCurrentPage]=React.useState(1);
-const [postPerPage,setPostPerPage]=React.useState(1);
+const [postsPerPage,setPostsPerPage]=React.useState(5);
 const [searchTerm, setSearchTerm] = React.useState("");
  const [searchResults, setSearchResults] = React.useState([]);
 React.useEffect(()=>{
@@ -82,8 +82,8 @@ history.push(`/warning/${id}`);
     history.push('/addemployee');
   }
 //Get Current Posts
-  const indexOfLastPost=currentPage*postPerPage;
-  const indexOfFirstPost=indexOfLastPost-postPerPage;
+  const indexOfLastPost=currentPage * postsPerPage;
+  const indexOfFirstPost=indexOfLastPost-postsPerPage;
 const currentPosts = searchResults.slice(indexOfFirstPost,indexOfLastPost);
 
   return (

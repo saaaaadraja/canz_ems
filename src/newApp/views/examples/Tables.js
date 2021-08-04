@@ -30,8 +30,8 @@ import {useHistory} from 'react-router'
 
 
 const Tables = () => {
-// const [currentPage,setCurrentPage]=React.useState(1);
-// const [postsPerPage,setPostsPerPage]=React.useState(5);
+const [currentPage,setCurrentPage]=React.useState(1);
+const [postsPerPage]=React.useState(10);
 const [searchTerm, setSearchTerm] = React.useState("");
  const [searchResults, setSearchResults] = React.useState([]);
 React.useEffect(()=>{
@@ -106,19 +106,19 @@ const sortTable=()=>{
   }
 }
 
-// //Get Current Posts
-//   const indexOfLastPost=currentPage * postsPerPage;
-//   const indexOfFirstPost=indexOfLastPost-postsPerPage;
-// const currentPosts = searchResults.slice(indexOfFirstPost,indexOfLastPost);
-// //pagination
-// const pageNumbers=[];
-// const totalPosts=searchResults.length;
-// for(let i=1;i<=Math.ceil(totalPosts/postsPerPage);i++){
-//   pageNumbers.push(i);
-//   console.log(pageNumbers);
-// }
+//Get Current Posts
+  const indexOfLastPost=currentPage * postsPerPage;
+  const indexOfFirstPost=indexOfLastPost-postsPerPage;
+const currentPosts = searchResults.slice(indexOfFirstPost,indexOfLastPost);
+//pagination
+const pageNumbers=[];
+const totalPosts=searchResults.length;
+for(let i=1;i<=Math.ceil(totalPosts/postsPerPage);i++){
+  pageNumbers.push(i);
+  console.log(pageNumbers);
+}
 
-// const paginate=(pageNumber)=>setCurrentPage(pageNumber);
+const paginate=(pageNumber)=>setCurrentPage(pageNumber);
   return (
     <>
       <Header />
@@ -262,7 +262,7 @@ const sortTable=()=>{
                 </tbody>
               </Table>
               <CardFooter className="py-4">
-                {/* <nav>
+                <nav>
                   <ul className='pagination'>
                     {
                       pageNumbers.map((number)=>{
@@ -277,7 +277,7 @@ const sortTable=()=>{
                       })
                     }
                   </ul>
-                </nav> */}
+                </nav>
               </CardFooter>
             </Card>
           </div>

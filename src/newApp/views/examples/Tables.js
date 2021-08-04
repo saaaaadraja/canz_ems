@@ -62,9 +62,17 @@ React.useEffect(()=>{
  setGetEmployee(EmpData);
   setSearchResults(EmpData);
   console.log(searchResults);
-  searchResults.sort((a,b)=>{
-    return a.full_name - b.full_name;
-  });
+
+  function compare( a, b ) {
+  if ( a.full_name < b.full_name ){
+    return -1;
+  }
+  if ( a.full_name > b.full_name ){
+    return 1;
+  }
+  return 0;
+}
+  searchResults.sort(compare);
   console.log(searchResults);
   }
   catch(error){

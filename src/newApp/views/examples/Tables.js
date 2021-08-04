@@ -85,7 +85,11 @@ history.push(`/warning/${id}`);
   const indexOfLastPost=currentPage * postsPerPage;
   const indexOfFirstPost=indexOfLastPost-postsPerPage;
 const currentPosts = searchResults.slice(indexOfFirstPost,indexOfLastPost);
-
+//pagination
+const pageNumbers=[];
+for(let i=1;i<=Math.ceil(searchResults.length/postsPerPage);i++){
+  pageNumbers.push(i);
+}
   return (
     <>
       <Header />
@@ -229,6 +233,19 @@ const currentPosts = searchResults.slice(indexOfFirstPost,indexOfLastPost);
                 </tbody>
               </Table>
               <CardFooter className="py-4">
+                <nav>
+                  <ul className='pagination'>
+                    {
+                      pageNumbers.map((number)=>{
+                        <li key={number} className='page-item'>
+                          <a href="!#" className='page-link'>
+                          {number}
+                          </a>
+                        </li>
+                      })
+                    }
+                  </ul>
+                </nav>
               </CardFooter>
             </Card>
           </div>

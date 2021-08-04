@@ -63,7 +63,7 @@ React.useEffect(()=>{
   setSearchResults(EmpData);
   console.log(searchResults);
 
-  function compare( a, b ) {
+  const compare=( a, b )=> {
   if ( a.full_name < b.full_name ){
     return -1;
   }

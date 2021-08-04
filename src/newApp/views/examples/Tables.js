@@ -31,7 +31,7 @@ import {useHistory} from 'react-router'
 
 const Tables = () => {
 const [currentPage,setCurrentPage]=React.useState(1);
-const [postsPerPage]=React.useState(10);
+const [postsPerPage]=React.useState(5);
 const [searchTerm, setSearchTerm] = React.useState("");
  const [searchResults, setSearchResults] = React.useState([]);
 React.useEffect(()=>{

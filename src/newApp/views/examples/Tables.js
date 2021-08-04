@@ -61,19 +61,7 @@ React.useEffect(()=>{
  const EmpData = EmployeeData.data.listEmployees.items;
  setGetEmployee(EmpData);
   setSearchResults(EmpData);
-  console.log(searchResults);
-
-  const compare=( a, b )=> {
-  if ( a.full_name < b.full_name ){
-    return -1;
-  }
-  if ( a.full_name > b.full_name ){
-    return 1;
-  }
-  return 0;
-}
-  searchResults.sort(compare);
-  console.log(searchResults);
+  
   }
   catch(error){
     console.log('error on fetching data',error);
@@ -99,6 +87,19 @@ history.push(`/warning/${id}`);
 const [IsSorted,setIsSorted]=React.useState(false);
 const sortTable=()=>{
   if(IsSorted){
+    console.log(searchResults);
+
+  const compare=( a, b )=> {
+  if ( a.full_name < b.full_name ){
+    return -1;
+  }
+  if ( a.full_name > b.full_name ){
+    return 1;
+  }
+  return 0;
+}
+  searchResults.sort(compare);
+  console.log(searchResults);
   searchResults.reverse();
   setIsSorted(!IsSorted);
   }

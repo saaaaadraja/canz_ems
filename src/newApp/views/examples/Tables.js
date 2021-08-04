@@ -29,8 +29,8 @@ import {useHistory} from 'react-router'
 
 
 const Tables = () => {
-const [currentPage,setCurrentPage]=React.useState(1);
-const [postsPerPage,setPostsPerPage]=React.useState(5);
+// const [currentPage,setCurrentPage]=React.useState(1);
+// const [postsPerPage,setPostsPerPage]=React.useState(5);
 const [searchTerm, setSearchTerm] = React.useState("");
  const [searchResults, setSearchResults] = React.useState([]);
 React.useEffect(()=>{
@@ -82,17 +82,17 @@ history.push(`/warning/${id}`);
     e.preventDefault();
     history.push('/addemployee');
   }
-//Get Current Posts
-  const indexOfLastPost=currentPage * postsPerPage;
-  const indexOfFirstPost=indexOfLastPost-postsPerPage;
-const currentPosts = searchResults.slice(indexOfFirstPost,indexOfLastPost);
-//pagination
-const pageNumbers=[];
-const totalPosts=searchResults.length;
-for(let i=1;i<=Math.ceil(totalPosts/postsPerPage);i++){
-  pageNumbers.push(i);
-  console.log(pageNumbers);
-}
+// //Get Current Posts
+//   const indexOfLastPost=currentPage * postsPerPage;
+//   const indexOfFirstPost=indexOfLastPost-postsPerPage;
+// const currentPosts = searchResults.slice(indexOfFirstPost,indexOfLastPost);
+// //pagination
+// const pageNumbers=[];
+// const totalPosts=searchResults.length;
+// for(let i=1;i<=Math.ceil(totalPosts/postsPerPage);i++){
+//   pageNumbers.push(i);
+//   console.log(pageNumbers);
+// }
 
 const paginate=(pageNumber)=>setCurrentPage(pageNumber);
   return (
@@ -146,7 +146,7 @@ const paginate=(pageNumber)=>setCurrentPage(pageNumber);
                 </thead>
                 <tbody>
                   {
-                currentPosts.map((employee,i)=>{
+                searchResults.map((employee,i)=>{
               return (<>
                <tr>
                     <td style={{fontSize:'12px',fontWeight:'900'}} className={`text-white ${employee.status==='active'?'bg-success':'bg-danger'}`}>{employee.status}</td>
@@ -238,7 +238,7 @@ const paginate=(pageNumber)=>setCurrentPage(pageNumber);
                 </tbody>
               </Table>
               <CardFooter className="py-4">
-                <nav>
+                {/* <nav>
                   <ul className='pagination'>
                     {
                       pageNumbers.map((number)=>{
@@ -253,7 +253,7 @@ const paginate=(pageNumber)=>setCurrentPage(pageNumber);
                       })
                     }
                   </ul>
-                </nav>
+                </nav> */}
               </CardFooter>
             </Card>
           </div>

@@ -84,12 +84,14 @@ history.push(`/warning/${id}`);
   }
 //sorting table by full name
 const [IsSorted,setIsSorted]=React.useState(false);
-const sortTable=(sorted)=>{
-  if(sorted){
-  searchResults.sort((a,b)=>a.full_name - b.full_name)
+const sortTable=()=>{
+  if(IsSorted){
+  searchResults.sort((a,b)=>a.full_name - b.full_name);
+  setIsSorted(!IsSorted);
   }
   else{
-  searchResults.sort((a,b)=>b.full_name - a.full_name)
+  searchResults.sort((a,b)=>b.full_name - a.full_name);
+   setIsSorted(!IsSorted);
   }
 }
 
@@ -133,7 +135,7 @@ const sortTable=(sorted)=>{
                     <th scope="col">Status</th>
                     <th scope="col">Picture</th>
                     <th scope="col">user id</th>
-                     <th scope="col" onClick={()=>sortTable(!IsSorted)}>Full Name</th>
+                     <th scope="col" onClick={()=>sortTable()}>Full Name</th>
                       <th scope="col">Father Name</th>
                        <th scope="col">CNIC</th>
                     <th scope="col">Email</th>

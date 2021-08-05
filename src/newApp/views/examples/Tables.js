@@ -98,7 +98,7 @@ history.push(`/warning/${id}`);
      
  }
     );
-    setSearchResults(results);
+    // setSearchResults(results);
 },[searchTerm])
 
 //Reversing table onClick

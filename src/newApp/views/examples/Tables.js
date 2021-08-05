@@ -62,6 +62,7 @@ EmpData.sort(compare);
 const indexOfLastPost=currentPage * postsPerPage;
 const indexOfFirstPost=indexOfLastPost-postsPerPage;
 setCurrentPosts(EmpData.slice(indexOfFirstPost,indexOfLastPost));
+setSearchResults(currentPosts);
 //Adding employee records in state hook
  setGetEmployee(EmpData);
  
@@ -103,7 +104,7 @@ React.useEffect(()=>{
 const indexOfLastPost=currentPage * postsPerPage;
 const indexOfFirstPost=indexOfLastPost-postsPerPage;
 setCurrentPosts(getEmployee.slice(indexOfFirstPost,indexOfLastPost));
-   setSearchTerm(currentPosts);
+setSearchResults(currentPosts);
 },[currentPage])
   
 //Reversing table onClick

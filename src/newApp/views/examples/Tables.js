@@ -102,9 +102,14 @@ let currentPosts=searchResults.slice(indexOfFirstPost,indexOfLastPost);
 //Reversing table onClick
 const [IsSorted,setIsSorted]=React.useState(true);
 const sortTable=()=>{
-  console.log(currentPosts);
+  if(IsSorted){
   currentPosts.reverse();
-  setIsSorted(!IsSorted); 
+  setIsSorted(!IsSorted);
+  }
+ else{
+   currentPosts.reverse();
+   setIsSorted(!IsSorted);
+ } 
 }
 
 //pagination

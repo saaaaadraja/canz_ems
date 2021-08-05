@@ -96,19 +96,23 @@ setSearchResults(results);
 //Get Current Posts
 const indexOfLastPost=currentPage * postsPerPage;
 const indexOfFirstPost=indexOfLastPost-postsPerPage;
-let currentPosts=searchResults.slice(indexOfFirstPost,indexOfLastPost);
+const currentPosts=searchResults.slice(indexOfFirstPost,indexOfLastPost);
 
   
 //Reversing table onClick
 const [IsSorted,setIsSorted]=React.useState(true);
 const sortTable=()=>{
   if(IsSorted){
+    console.log(currentPosts);
   currentPosts.reverse();
   setIsSorted(!IsSorted);
+  console.log(currentPosts);
   }
  else{
+   console.log(currentPosts);
    currentPosts.reverse();
    setIsSorted(!IsSorted);
+   console.log(currentPosts);
  } 
 }
 

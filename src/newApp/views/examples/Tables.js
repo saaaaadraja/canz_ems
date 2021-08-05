@@ -111,7 +111,7 @@ const sortTable=()=>{
   }
   return 0;
 }
-currentPosts.sort(compare);
+searchResults.sort(compare);
   }
   else{
     const compare=( a, b )=> {
@@ -123,7 +123,7 @@ currentPosts.sort(compare);
   }
   return 0;
 }
-currentPosts.sort(compare);
+searchResults.sort(compare);
   }
 }
 

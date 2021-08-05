@@ -103,9 +103,11 @@ const currentPosts=searchResults.slice(indexOfFirstPost,indexOfLastPost);
 const sortTable=()=>{
 if(isSorted){
 searchResults.reverse();
+setIsSorted(false);
 }
 else{
   searchResults.reverse();
+  setIsSorted(true);
 }
   
 }

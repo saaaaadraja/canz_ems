@@ -102,11 +102,11 @@ const currentPosts=searchResults.slice(indexOfFirstPost,indexOfLastPost);
 //Reversing table onClick
 const sortTable=()=>{
 if(isSorted){
-searchResults.reverse();
+currentPosts.reverse();
 setIsSorted(false);
 }
 else{
-  searchResults.reverse();
+  currentPosts.reverse();
   setIsSorted(true);
 }
   

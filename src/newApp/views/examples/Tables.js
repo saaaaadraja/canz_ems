@@ -29,26 +29,13 @@ import {useHistory} from 'react-router'
 
 
 const Tables = () => {
+  const history=useHistory();
+  const [getEmployee,setGetEmployee]=React.useState([]);
 const [currentPage,setCurrentPage]=React.useState(1);
 const [postsPerPage]=React.useState(5);
 const [searchTerm, setSearchTerm] = React.useState("");
  const [searchResults, setSearchResults] = React.useState([]);
-React.useEffect(()=>{
- const results = currentPosts.filter((person) =>{
-   if( person.full_name.toLowerCase().includes(searchTerm) || person.supervisor.toLowerCase().includes(searchTerm)){
-     return true
-   }
-   else{
-     return false
-   }
-     
- }
-    );
-    setSearchResults(results);
-},[searchTerm])
 
-  const history=useHistory();
-  const [getEmployee,setGetEmployee]=React.useState([]);
 React.useEffect(()=>{
        fetchData();
     },[]);
@@ -99,6 +86,21 @@ history.push(`/warning/${id}`);
   const indexOfFirstPost=indexOfLastPost-postsPerPage;
   const currentPosts = getEmployee.slice(indexOfFirstPost,indexOfLastPost);
   setSearchResults(currentPosts);
+
+  React.useEffect(()=>{
+ const results = currentPosts.filter((person) =>{
+   if( person.full_name.toLowerCase().includes(searchTerm) || person.supervisor.toLowerCase().includes(searchTerm)){
+     return true
+   }
+   else{
+     return false
+   }
+     
+ }
+    );
+    setSearchResults(results);
+},[searchTerm])
+
 //Reversing table onClick
 const [IsSorted,setIsSorted]=React.useState(true);
 const sortTable=()=>{

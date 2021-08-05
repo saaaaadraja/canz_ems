@@ -59,6 +59,16 @@ React.useEffect(()=>{
   try{
  const EmployeeData = await API.graphql(graphqlOperation(listEmployees));
  const EmpData = EmployeeData.data.listEmployees.items;
+  const compare=( a, b )=> {
+  if ( a.full_name < b.full_name ){
+    return -1;
+  }
+  if ( a.full_name > b.full_name ){
+    return 1;
+  }
+  return 0;
+}
+  EmpData.sort(compare);
  setGetEmployee(EmpData);
   setSearchResults(EmpData);
   
@@ -87,16 +97,6 @@ history.push(`/warning/${id}`);
 const [IsSorted,setIsSorted]=React.useState(true);
 const sortTable=()=>{
   if(IsSorted){
-  const compare=( a, b )=> {
-  if ( a.full_name < b.full_name ){
-    return -1;
-  }
-  if ( a.full_name > b.full_name ){
-    return 1;
-  }
-  return 0;
-}
-  searchResults.sort(compare);
   searchResults.reverse();
   setIsSorted(!IsSorted);
   }
@@ -195,7 +195,7 @@ const paginate=(pageNumber)=>setCurrentPage(pageNumber);
                     <td style={{fontSize:'12px'}}>
                        {employee.employee_name} 
                     </td>
-                     <td style={{fontSize:'12px',textTransform:'capitalize'}}>
+                  <td style={{ fontSize: '12px', textTransform: 'capitalize'}}>
                        <a href={`/user/${employee.id}`}>{employee.full_name}</a>
                     </td>
                      <td style={{fontSize:'12px'}}>

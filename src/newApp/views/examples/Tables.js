@@ -195,7 +195,7 @@ const paginate=(pageNumber)=>setCurrentPage(pageNumber);
                     <td style={{fontSize:'12px'}}>
                        {employee.employee_name} 
                     </td>
-                     <td style={{fontSize:'12px'}}>
+                     <td style={{fontSize:'12px',textTransform:'capitalize'}}>
                        <a href={`/user/${employee.id}`}>{employee.full_name}</a>
                     </td>
                      <td style={{fontSize:'12px'}}>

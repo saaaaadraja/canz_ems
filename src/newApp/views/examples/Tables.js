@@ -33,6 +33,7 @@ const Tables = () => {
   const [getEmployee,setGetEmployee]=React.useState([]);
 const [currentPage,setCurrentPage]=React.useState(1);
 const [postsPerPage]=React.useState(5);
+const [currentPosts,setCurrentPosts]=React.useState([]);
 const [searchTerm, setSearchTerm] = React.useState("");
  const [searchResults, setSearchResults] = React.useState([]);
 
@@ -57,10 +58,13 @@ React.useEffect(()=>{
   return 0;
 }
 EmpData.sort(compare);
-
+//setting current page posts
+const indexOfLastPost=currentPage * postsPerPage;
+const indexOfFirstPost=indexOfLastPost-postsPerPage;
+setCurrentPosts(EmpData.slice(indexOfFirstPost,indexOfLastPost));
 //Adding employee records in state hook
  setGetEmployee(EmpData);
- setSearchTerm(EmpData);
+ 
   }
   catch(error){
     console.log('error on fetching data',error);
@@ -82,7 +86,7 @@ history.push(`/warning/${id}`);
   }
 
   React.useEffect(()=>{
- const results = getEmployee.filter((person) =>{
+ const results = currentPosts.filter((person) =>{
    if( person.full_name.toLowerCase().includes(searchTerm) || person.supervisor.toLowerCase().includes(searchTerm)){
      return true
    }
@@ -95,11 +99,13 @@ history.push(`/warning/${id}`);
     setSearchResults(results);
 },[searchTerm])
 //Get Current Posts
-
-  const indexOfLastPost=currentPage * postsPerPage;
-  const indexOfFirstPost=indexOfLastPost-postsPerPage;
-  const currentPosts = getEmployee.slice(indexOfFirstPost,indexOfLastPost);
-
+React.useEffect(()=>{
+const indexOfLastPost=currentPage * postsPerPage;
+const indexOfFirstPost=indexOfLastPost-postsPerPage;
+setCurrentPosts(getEmployee.slice(indexOfFirstPost,indexOfLastPost));
+   setSearchTerm(currentPosts);
+},[currentPage])
+  
 //Reversing table onClick
 const [IsSorted,setIsSorted]=React.useState(true);
 const sortTable=()=>{

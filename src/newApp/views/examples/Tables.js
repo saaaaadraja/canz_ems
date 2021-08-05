@@ -33,7 +33,6 @@ const Tables = () => {
   const [getEmployee,setGetEmployee]=React.useState([]);
 const [currentPage,setCurrentPage]=React.useState(1);
 const [postsPerPage]=React.useState(5);
-const [currentPosts,setCurrentPosts]=React.useState([]);
 const [searchTerm, setSearchTerm] = React.useState("");
  const [searchResults, setSearchResults] = React.useState([]);
 
@@ -58,14 +57,8 @@ React.useEffect(()=>{
   return 0;
 }
 EmpData.sort(compare);
-//setting current page posts
-const indexOfLastPost=currentPage * postsPerPage;
-const indexOfFirstPost=indexOfLastPost-postsPerPage;
-setCurrentPosts(EmpData.slice(indexOfFirstPost,indexOfLastPost));
-setSearchResults(currentPosts);
 //Adding employee records in state hook
  setGetEmployee(EmpData);
- 
   }
   catch(error){
     console.log('error on fetching data',error);
@@ -97,15 +90,13 @@ history.push(`/warning/${id}`);
      
  }
     );
-    setSearchResults(results);
+ currentPosts=results;
 },[searchTerm])
 //Get Current Posts
-React.useEffect(()=>{
 const indexOfLastPost=currentPage * postsPerPage;
 const indexOfFirstPost=indexOfLastPost-postsPerPage;
-setCurrentPosts(getEmployee.slice(indexOfFirstPost,indexOfLastPost));
-setSearchResults(currentPosts);
-},[currentPage])
+let currentPosts=getEmployee.slice(indexOfFirstPost,indexOfLastPost);
+
   
 //Reversing table onClick
 const [IsSorted,setIsSorted]=React.useState(true);
@@ -174,7 +165,7 @@ return (
                 </thead>
                 <tbody>
                   {
-              searchResults.map((employee,i)=>{
+            currentPosts.map((employee,i)=>{
               return (<>
                <tr>
                     <td style={{fontSize:'12px',fontWeight:'900'}} className={`text-white ${employee.status==='active'?'bg-success':'bg-danger'}`}>{employee.status}</td>

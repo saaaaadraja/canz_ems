@@ -47,16 +47,16 @@ React.useEffect(()=>{
 
  //sorting table by full name
 
-//   const compare=( a, b )=> {
-//   if ( a.full_name < b.full_name ){
-//     return -1;
-//   }
-//   if ( a.full_name > b.full_name ){
-//     return 1;
-//   }
-//   return 0;
-// }
-// EmpData.sort(compare);
+  const compare=( a, b )=> {
+  if ( a.full_name < b.full_name ){
+    return -1;
+  }
+  if ( a.full_name > b.full_name ){
+    return 1;
+  }
+  return 0;
+}
+EmpData.sort(compare);
 //Adding employee records in state hook
  setGetEmployee(EmpData);
  setSearchResults(EmpData);
@@ -101,17 +101,12 @@ const currentPosts=searchResults.slice(indexOfFirstPost,indexOfLastPost);
   const [isSorted,setIsSorted]=React.useState(false);
 //Reversing table onClick
 const sortTable=()=>{
-   const compare=( a, b )=> {
-  if ( a.full_name < b.full_name ){
-    return -1;
-  }
-  if ( a.full_name > b.full_name ){
-    return 1;
-  }
-  return 0;
-}
-searchResults.sort(compare);
+if(isSorted){
 searchResults.reverse();
+}
+else{
+  searchResults.reverse();
+}
   
 }
 

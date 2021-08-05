@@ -80,7 +80,7 @@ history.push(`/warning/${id}`);
   }
 
   React.useEffect(()=>{
- const results = currentPosts.filter((person) =>{
+ const results = getEmployee.filter((person) =>{
    if( person.full_name.toLowerCase().includes(searchTerm) || person.supervisor.toLowerCase().includes(searchTerm)){
      return true
    }
@@ -90,12 +90,12 @@ history.push(`/warning/${id}`);
      
  }
     );
- currentPosts=results;
+setSearchResults(results);
 },[searchTerm])
 //Get Current Posts
 const indexOfLastPost=currentPage * postsPerPage;
 const indexOfFirstPost=indexOfLastPost-postsPerPage;
-let currentPosts=getEmployee.slice(indexOfFirstPost,indexOfLastPost);
+let currentPosts=searchResults.slice(indexOfFirstPost,indexOfLastPost);
 
   
 //Reversing table onClick

@@ -101,7 +101,17 @@ const currentPosts=searchResults.slice(indexOfFirstPost,indexOfLastPost);
   
 //Reversing table onClick
 const sortTable=()=>{
-  searchResults.reverse();
+   const compare=( a, b )=> {
+  if ( a.full_name < b.full_name ){
+    return -1;
+  }
+  if ( a.full_name > b.full_name ){
+    return 1;
+  }
+  return 0;
+}
+currentPosts.sort(compare);
+currentPosts.reverse();
 }
 
 //pagination

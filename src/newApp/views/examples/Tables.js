@@ -58,13 +58,7 @@ React.useEffect(()=>{
  const EmpData = EmployeeData.data.listEmployees.items;
  setGetEmployee(EmpData);
   setSearchResults(EmpData);
-  
-//Get Current Posts
-
-  const indexOfLastPost=currentPage * postsPerPage;
-  const indexOfFirstPost=indexOfLastPost-postsPerPage;
-const currentPosts = searchResults.slice(indexOfFirstPost,indexOfLastPost);
-//sorting table by full name
+  //sorting table by full name
 
   const compare=( a, b )=> {
   if ( a.full_name < b.full_name ){
@@ -75,7 +69,8 @@ const currentPosts = searchResults.slice(indexOfFirstPost,indexOfLastPost);
   }
   return 0;
 }
- currentPosts.sort(compare);
+ searchResults.sort(compare);
+
   }
   catch(error){
     console.log('error on fetching data',error);
@@ -96,19 +91,17 @@ history.push(`/warning/${id}`);
     history.push('/addemployee');
   }
 
+//Get Current Posts
+
+  const indexOfLastPost=currentPage * postsPerPage;
+  const indexOfFirstPost=indexOfLastPost-postsPerPage;
+const currentPosts = searchResults.slice(indexOfFirstPost,indexOfLastPost);
 
 //Reversing table onClick
-
 const [IsSorted,setIsSorted]=React.useState(true);
 const sortTable=()=>{
-  if(IsSorted){
   currentPosts.reverse();
-  setIsSorted(!IsSorted);
-  }
-  else{
-   currentPosts.reverse();
-   setIsSorted(!IsSorted);
-  }
+  setIsSorted(!IsSorted); 
 }
 
 

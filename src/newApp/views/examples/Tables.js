@@ -46,6 +46,7 @@ React.useEffect(()=>{
     );
     setSearchResults(results);
 },[searchTerm])
+
   const history=useHistory();
   const [getEmployee,setGetEmployee]=React.useState([]);
 React.useEffect(()=>{
@@ -56,9 +57,8 @@ React.useEffect(()=>{
   try{
  const EmployeeData = await API.graphql(graphqlOperation(listEmployees));
  const EmpData = EmployeeData.data.listEmployees.items;
- setGetEmployee(EmpData);
-  setSearchResults(EmpData);
-  //sorting table by full name
+
+ //sorting table by full name
 
   const compare=( a, b )=> {
   if ( a.full_name < b.full_name ){
@@ -69,8 +69,10 @@ React.useEffect(()=>{
   }
   return 0;
 }
- searchResults.sort(compare);
+EmpData.sort(compare);
 
+//Adding employee records in state hook
+ setGetEmployee(EmpData);
   }
   catch(error){
     console.log('error on fetching data',error);
@@ -95,8 +97,8 @@ history.push(`/warning/${id}`);
 
   const indexOfLastPost=currentPage * postsPerPage;
   const indexOfFirstPost=indexOfLastPost-postsPerPage;
-const currentPosts = searchResults.slice(indexOfFirstPost,indexOfLastPost);
-
+  const currentPosts = getEmployee.slice(indexOfFirstPost,indexOfLastPost);
+  setSearchResults(currentPosts);
 //Reversing table onClick
 const [IsSorted,setIsSorted]=React.useState(true);
 const sortTable=()=>{
@@ -104,14 +106,12 @@ const sortTable=()=>{
   setIsSorted(!IsSorted); 
 }
 
-
 //pagination
 
 const pageNumbers=[];
 const totalPosts=searchResults.length;
 for(let i=1;i<=Math.ceil(totalPosts/postsPerPage);i++){
   pageNumbers.push(i);
-  console.log(pageNumbers);
 }
 const paginate=(pageNumber)=>setCurrentPage(pageNumber);
 
@@ -166,17 +166,15 @@ return (
                 </thead>
                 <tbody>
                   {
-                currentPosts.map((employee,i)=>{
+              searchResults.map((employee,i)=>{
               return (<>
                <tr>
                     <td style={{fontSize:'12px',fontWeight:'900'}} className={`text-white ${employee.status==='active'?'bg-success':'bg-danger'}`}>{employee.status}</td>
                   <th scope="row">
-                    <a href={`/user/${employee.id}`}>
                       <Media className="align-items-center">
                          <a
                           className="avatar rounded-circle mr-3"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
+                          href={`/user/${employee.id}`}
                           style={{height:'30px',width:'30px'}}
                         >
                            <img
@@ -186,7 +184,6 @@ return (
                           /> 
                          </a>
                         </Media>
-                      </a>
                     </th> 
                    
                     <td style={{fontSize:'12px'}}>

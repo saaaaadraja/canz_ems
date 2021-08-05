@@ -18,7 +18,6 @@ import {
   InputGroup,
   InputGroupAddon,
   Input,
-  PaginationItem,
     // UncontrolledTooltip,
 } from "reactstrap";
 import 'react-bootstrap';
@@ -35,7 +34,7 @@ const [postsPerPage]=React.useState(5);
 const [searchTerm, setSearchTerm] = React.useState("");
  const [searchResults, setSearchResults] = React.useState([]);
 React.useEffect(()=>{
- const results = getEmployee.filter((person) =>{
+ const results = currentPosts.filter((person) =>{
    if( person.full_name.toLowerCase().includes(searchTerm) || person.supervisor.toLowerCase().includes(searchTerm)){
      return true
    }
@@ -47,8 +46,6 @@ React.useEffect(()=>{
     );
     setSearchResults(results);
 },[searchTerm])
-
-
   const history=useHistory();
   const [getEmployee,setGetEmployee]=React.useState([]);
 React.useEffect(()=>{
@@ -59,16 +56,6 @@ React.useEffect(()=>{
   try{
  const EmployeeData = await API.graphql(graphqlOperation(listEmployees));
  const EmpData = EmployeeData.data.listEmployees.items;
-  const compare=( a, b )=> {
-  if ( a.full_name < b.full_name ){
-    return -1;
-  }
-  if ( a.full_name > b.full_name ){
-    return 1;
-  }
-  return 0;
-}
-  EmpData.sort(compare);
  setGetEmployee(EmpData);
   setSearchResults(EmpData);
   
@@ -87,39 +74,55 @@ history.push(`/editjobhistory/${id}`);
 const handleWarnig =(id)=>{
 history.push(`/warning/${id}`);
 }
-
-
   const clickHandler=(e)=>{
     e.preventDefault();
     history.push('/addemployee');
   }
-//sorting table by full name
+
+
+//Reversing table after sorting
+
 const [IsSorted,setIsSorted]=React.useState(true);
 const sortTable=()=>{
   if(IsSorted){
-  searchResults.reverse();
+  currentPosts.reverse();
   setIsSorted(!IsSorted);
   }
   else{
-  searchResults.reverse();
+   currentPosts.reverse();
    setIsSorted(!IsSorted);
   }
 }
 
 //Get Current Posts
+
   const indexOfLastPost=currentPage * postsPerPage;
   const indexOfFirstPost=indexOfLastPost-postsPerPage;
 const currentPosts = searchResults.slice(indexOfFirstPost,indexOfLastPost);
+//sorting table by full name
+
+  const compare=( a, b )=> {
+  if ( a.full_name < b.full_name ){
+    return -1;
+  }
+  if ( a.full_name > b.full_name ){
+    return 1;
+  }
+  return 0;
+}
+ currentPosts.sort(compare);
+
 //pagination
+
 const pageNumbers=[];
 const totalPosts=searchResults.length;
 for(let i=1;i<=Math.ceil(totalPosts/postsPerPage);i++){
   pageNumbers.push(i);
   console.log(pageNumbers);
 }
-
 const paginate=(pageNumber)=>setCurrentPage(pageNumber);
-  return (
+
+return (
     <>
       <Header />
       {/* Page content */}

@@ -59,6 +59,7 @@ React.useEffect(()=>{
 EmpData.sort(compare);
 //Adding employee records in state hook
  setGetEmployee(EmpData);
+ setSearchResults(EmpData);
   }
   catch(error){
     console.log('error on fetching data',error);
@@ -101,6 +102,7 @@ let currentPosts=searchResults.slice(indexOfFirstPost,indexOfLastPost);
 //Reversing table onClick
 const [IsSorted,setIsSorted]=React.useState(true);
 const sortTable=()=>{
+  console.log(currentPosts);
   currentPosts.reverse();
   setIsSorted(!IsSorted); 
 }
@@ -165,7 +167,7 @@ return (
                 </thead>
                 <tbody>
                   {
-            searchResults.map((employee,i)=>{
+            currentPosts.map((employee,i)=>{
               return (<>
                <tr>
                     <td style={{fontSize:'12px',fontWeight:'900'}} className={`text-white ${employee.status==='active'?'bg-success':'bg-danger'}`}>{employee.status}</td>
@@ -258,7 +260,7 @@ return (
                   <ul className='pagination'>
                     {
                       pageNumbers.map((number)=>{
-                       return <li key={number} className='page-item active'>
+                       return <li key={number} className='page-item'>
                           <a onClick={(e)=>{
                             e.preventDefault();
                             paginate(number);

@@ -59,6 +59,23 @@ React.useEffect(()=>{
  setGetEmployee(EmpData);
   setSearchResults(EmpData);
   
+//Get Current Posts
+
+  const indexOfLastPost=currentPage * postsPerPage;
+  const indexOfFirstPost=indexOfLastPost-postsPerPage;
+const currentPosts = searchResults.slice(indexOfFirstPost,indexOfLastPost);
+//sorting table by full name
+
+  const compare=( a, b )=> {
+  if ( a.full_name < b.full_name ){
+    return -1;
+  }
+  if ( a.full_name > b.full_name ){
+    return 1;
+  }
+  return 0;
+}
+ currentPosts.sort(compare);
   }
   catch(error){
     console.log('error on fetching data',error);
@@ -80,7 +97,7 @@ history.push(`/warning/${id}`);
   }
 
 
-//Reversing table after sorting
+//Reversing table onClick
 
 const [IsSorted,setIsSorted]=React.useState(true);
 const sortTable=()=>{
@@ -94,23 +111,6 @@ const sortTable=()=>{
   }
 }
 
-//Get Current Posts
-
-  const indexOfLastPost=currentPage * postsPerPage;
-  const indexOfFirstPost=indexOfLastPost-postsPerPage;
-const currentPosts = searchResults.slice(indexOfFirstPost,indexOfLastPost);
-//sorting table by full name
-
-  const compare=( a, b )=> {
-  if ( a.full_name < b.full_name ){
-    return -1;
-  }
-  if ( a.full_name > b.full_name ){
-    return 1;
-  }
-  return 0;
-}
- currentPosts.sort(compare);
 
 //pagination
 
@@ -178,6 +178,7 @@ return (
                <tr>
                     <td style={{fontSize:'12px',fontWeight:'900'}} className={`text-white ${employee.status==='active'?'bg-success':'bg-danger'}`}>{employee.status}</td>
                   <th scope="row">
+                    <a href={`/user/${employee.id}`}>
                       <Media className="align-items-center">
                          <a
                           className="avatar rounded-circle mr-3"
@@ -192,14 +193,13 @@ return (
                           /> 
                          </a>
                         </Media>
-                      
+                      </a>
                     </th> 
                    
                     <td style={{fontSize:'12px'}}>
                        {employee.employee_name} 
                     </td>
-                  <td style={{ fontSize: '12px', textTransform: 'capitalize'}}>
-                       <a href={`/user/${employee.id}`}>{employee.full_name}</a>
+                  <td style={{ fontSize: '12px', textTransform: 'capitalize'}}>{employee.full_name}
                     </td>
                      <td style={{fontSize:'12px'}}>
                         {employee.father_name}
@@ -269,7 +269,7 @@ return (
                   <ul className='pagination'>
                     {
                       pageNumbers.map((number)=>{
-                       return <li key={number} className='page-item'>
+                       return <li key={number} className='page-item active'>
                           <a onClick={(e)=>{
                             e.preventDefault();
                             paginate(number);

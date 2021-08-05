@@ -165,7 +165,7 @@ return (
                 </thead>
                 <tbody>
                   {
-            currentPosts.map((employee,i)=>{
+            searchResults.map((employee,i)=>{
               return (<>
                <tr>
                     <td style={{fontSize:'12px',fontWeight:'900'}} className={`text-white ${employee.status==='active'?'bg-success':'bg-danger'}`}>{employee.status}</td>

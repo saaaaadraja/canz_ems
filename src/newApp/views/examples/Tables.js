@@ -98,9 +98,10 @@ const indexOfLastPost=currentPage * postsPerPage;
 const indexOfFirstPost=indexOfLastPost-postsPerPage;
 const currentPosts=searchResults.slice(indexOfFirstPost,indexOfLastPost);
 
-  
+  const [isSorted,setIsSorted]=React.useState(false);
 //Reversing table onClick
 const sortTable=()=>{
+  if(isSorted){
    const compare=( a, b )=> {
   if ( a.full_name < b.full_name ){
     return -1;
@@ -112,6 +113,20 @@ const sortTable=()=>{
 }
 currentPosts.sort(compare);
 currentPosts.reverse();
+  }
+  else{
+    const compare=( a, b )=> {
+  if ( a.full_name > b.full_name ){
+    return -1;
+  }
+  if ( a.full_name < b.full_name ){
+    return 1;
+  }
+  return 0;
+}
+currentPosts.sort(compare);
+currentPosts.reverse();
+  }
 }
 
 //pagination

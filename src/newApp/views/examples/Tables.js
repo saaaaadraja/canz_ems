@@ -101,7 +101,6 @@ const currentPosts=searchResults.slice(indexOfFirstPost,indexOfLastPost);
   const [isSorted,setIsSorted]=React.useState(false);
 //Reversing table onClick
 const sortTable=()=>{
-  if(isSorted){
    const compare=( a, b )=> {
   if ( a.full_name < b.full_name ){
     return -1;
@@ -112,19 +111,8 @@ const sortTable=()=>{
   return 0;
 }
 searchResults.sort(compare);
-  }
-  else{
-    const compare=( a, b )=> {
-  if ( a.full_name > b.full_name ){
-    return -1;
-  }
-  if ( a.full_name < b.full_name ){
-    return 1;
-  }
-  return 0;
-}
-searchResults.sort(compare);
-  }
+searchResults.reverse();
+  
 }
 
 //pagination

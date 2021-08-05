@@ -60,6 +60,7 @@ EmpData.sort(compare);
 
 //Adding employee records in state hook
  setGetEmployee(EmpData);
+ setSearchTerm(EmpData);
   }
   catch(error){
     console.log('error on fetching data',error);
@@ -98,7 +99,6 @@ history.push(`/warning/${id}`);
   const indexOfLastPost=currentPage * postsPerPage;
   const indexOfFirstPost=indexOfLastPost-postsPerPage;
   const currentPosts = getEmployee.slice(indexOfFirstPost,indexOfLastPost);
-  setSearchResults(currentPosts);
 
 //Reversing table onClick
 const [IsSorted,setIsSorted]=React.useState(true);

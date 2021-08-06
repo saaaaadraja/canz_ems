@@ -5,6 +5,9 @@ import {useHistory} from 'react-router'
 // reactstrap components
 import {
   Input,
+  InputGroupText,
+  InputGroup,
+  InputGroupAddon,
   Badge,
   Card,
   CardHeader,
@@ -93,7 +96,16 @@ history.push(`/empLeave/${id}`)
           <div className="col">
             <Card className="shadow">
               <CardHeader className="border-0">
-                  <Input placeholder="Search by employee name"  type="text" value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value.toLowerCase())}  />
+                  <CardHeader className="border-0">
+                  <InputGroup className="input-group-alternative" style={{width:'30vw',boxShadow:'1px 1px 2px lightGray'}}>
+                <InputGroupAddon addonType="prepend">
+                  <InputGroupText >
+                    <i className="fas fa-search" />
+                  </InputGroupText>
+                </InputGroupAddon>
+                <Input placeholder="Search by employee name "  type="text" value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value.toLowerCase())}  />
+              </InputGroup>
+              </CardHeader>
               </CardHeader>
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light">
@@ -172,7 +184,16 @@ history.push(`/empLeave/${id}`)
           <div className="col">
             <Card className="shadow">
               <CardHeader className="border-0">
-                  <Input placeholder="Search by employee name"  type="text" value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value.toLowerCase())}  />
+                  <CardHeader className="border-0">
+                  <InputGroup className="input-group-alternative" style={{width:'30vw',boxShadow:'1px 1px 2px lightGray'}}>
+                <InputGroupAddon addonType="prepend">
+                  <InputGroupText >
+                    <i className="fas fa-search" />
+                  </InputGroupText>
+                </InputGroupAddon>
+                <Input placeholder="Search by employee name "  type="text" value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value.toLowerCase())}  />
+              </InputGroup>
+              </CardHeader>
               </CardHeader>
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light">

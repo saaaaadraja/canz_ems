@@ -31,6 +31,17 @@ const [leaveResults,setLeaveResults]=React.useState([]);
   try{
  const LeavesData = await API.graphql(graphqlOperation(listLeaves))
  const data = LeavesData.data.listLeaves.items;
+ const compare=(a,b)=>{
+   if(a.from<b.from){
+     return -1;
+   }
+   if(a.from>b.from){
+return 1;
+   }
+   return 0;
+ }
+ data.sort(compare);
+ data.reverse();
  setGetLeaves(data);
   }
   catch(error){

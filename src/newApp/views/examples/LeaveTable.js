@@ -51,7 +51,7 @@ return 1;
   }
 }
 React.useEffect(()=>{
-fetchData()
+fetchData();
 },[])
 
 React.useEffect(()=>{
@@ -78,7 +78,16 @@ React.useEffect(()=>{
  }
     );
 setSearchResults(results);
-},[searchTerm])
+},[searchTerm]);
+React.useEffect(()=>{
+  if(localStorage.getItem('leaves')<leaveResults.length){
+    console.log('notify');
+     
+  localStorage.setItem('leaves',leaveResults.length);
+  
+  }
+ console.log(localStorage.getItem('leaves'));
+},[leaveResults]);
 const handleEdit=(id)=>{
 history.push(`/empLeave/${id}`)
 }

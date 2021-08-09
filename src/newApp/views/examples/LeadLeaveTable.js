@@ -14,9 +14,6 @@ import {
   DropdownItem,
   UncontrolledDropdown,
   DropdownToggle,
-  Pagination,
-  PaginationItem,
-  PaginationLink,
   Table,
   Container,
   Row,
@@ -26,6 +23,7 @@ import Header from "../../components/Headers/Header.js";
 
 const LeadLeaveTables = () => {
   const userId = id[id.length-1];
+  
   const [leaveResult,setLeaveResult] = React.useState([]);
   const [empName,setEmpName]= React.useState('');
   const history=useHistory();
@@ -61,8 +59,8 @@ React.useEffect(()=>{
 
 const result = getLeaves.filter((leave)=>leave.supervisor.toLowerCase()===empName.toLowerCase());
 setLeaveResult(result);
-},[getLeaves])
 
+},[getLeaves])
   return (
     <>
       <Header />
@@ -78,8 +76,6 @@ setLeaveResult(result);
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light">
                   <tr>
-                    {/* <th scope="col">Leave Id</th> */}
-                    {/* <th scope="col">Employee Id</th> */}
                     <th scope="col">Employee Name</th>
                     <th scope="col">Leave</th>
                     <th scope="col">From</th>
@@ -130,13 +126,6 @@ setLeaveResult(result);
                           >
                              Edit
                           </DropdownItem>
-
-                          {/* <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            Delete
-                          </DropdownItem> */}
                         </DropdownMenu>
                       </UncontrolledDropdown>
                     </td>
@@ -148,56 +137,6 @@ setLeaveResult(result);
                 </tbody>
               </Table>
               <CardFooter className="py-4">
-                {/* <nav aria-label="...">
-                  <Pagination
-                    className="pagination justify-content-end mb-0"
-                    listClassName="justify-content-end mb-0"
-                  >
-                    <PaginationItem className="disabled">
-                      <PaginationLink
-                        href="#pablo"
-                        onClick={(e) => e.preventDefault()}
-                        tabIndex="-1"
-                      >
-                        <i className="fas fa-angle-left" />
-                        <span className="sr-only">Previous</span>
-                      </PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem className="active">
-                      <PaginationLink
-                        href="#pablo"
-                        onClick={(e) => e.preventDefault()}
-                      >
-                        1
-                      </PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem>
-                      <PaginationLink
-                        href="#pablo"
-                        onClick={(e) => e.preventDefault()}
-                      >
-                        2 <span className="sr-only">(current)</span>
-                      </PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem>
-                      <PaginationLink
-                        href="#pablo"
-                        onClick={(e) => e.preventDefault()}
-                      >
-                        3
-                      </PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem>
-                      <PaginationLink
-                        href="#pablo"
-                        onClick={(e) => e.preventDefault()}
-                      >
-                        <i className="fas fa-angle-right" />
-                        <span className="sr-only">Next</span>
-                      </PaginationLink>
-                    </PaginationItem>
-                  </Pagination>
-                </nav> */}
               </CardFooter>
             </Card>
           </div>

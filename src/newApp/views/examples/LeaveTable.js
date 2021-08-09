@@ -86,9 +86,9 @@ React.useEffect(()=>{
   localStorage.setItem('leaves',leaveResults.length);
   
   }
-  if(localStorage.getItem('leaves')>leaveResults.length){
-      localStorage.setItem('leaves',leaveResults.length);
-  }
+  // if(localStorage.getItem('leaves')>leaveResults.length){
+  //     localStorage.setItem('leaves',leaveResults.length);
+  // }
  console.log(localStorage.getItem('leaves'));
 },[leaveResults]);
 const handleEdit=(id)=>{

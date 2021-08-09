@@ -81,10 +81,13 @@ setSearchResults(results);
 },[searchTerm]);
 React.useEffect(()=>{
   if(localStorage.getItem('leaves')<leaveResults.length){
-    console.log('notify');
+    window.alert('new application added');
      
   localStorage.setItem('leaves',leaveResults.length);
   
+  }
+  if(localStorage.getItem('leaves')>leaveResults.length){
+      localStorage.setItem('leaves',leaveResults.length);
   }
  console.log(localStorage.getItem('leaves'));
 },[leaveResults]);

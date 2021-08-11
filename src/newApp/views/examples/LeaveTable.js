@@ -26,15 +26,19 @@ import {
 import Header from "../../components/Headers/Header.js";
 
 const LeaveTables = () => {
+  //useState hooks used in this program
 const [leaveResults,setLeaveResults]=React.useState([]);
 const [searchTerm, setSearchTerm] = React.useState("");
- const [searchResults, setSearchResults] = React.useState([]);
-  const history=useHistory();
-     const [getLeaves,setGetLeaves]=React.useState([]);
+const [searchResults, setSearchResults] = React.useState([]);;
+const [getLeaves,setGetLeaves]=React.useState([]);
+//useHistory function assinging
+const history=useHistory();
+//function for fetching leave data from database
   const fetchData= async ()=>{
   try{
  const LeavesData = await API.graphql(graphqlOperation(listLeaves))
  const data = LeavesData.data.listLeaves.items;
+ //function for comparing data and arranging it in ascending order
  const compare=(a,b)=>{
    if(a.from<b.from){
      return -1;
@@ -44,18 +48,21 @@ return 1;
    }
    return 0;
  }
+ //sorting function
  data.sort(compare);
  data.reverse();
+ //storing sorted leaves in getLeaves hook
  setGetLeaves(data);
   }
   catch(error){
     console.log('error on fetching data',error);
   }
 }
+//useEffect hook for fetching leaves from database
 React.useEffect(()=>{
 fetchData();
 },[])
-
+//useEffect hook for filtering leaves for hr manager module
 React.useEffect(()=>{
  const result= getLeaves.filter((leave)=>
  {
@@ -68,6 +75,7 @@ React.useEffect(()=>{
   })
  setLeaveResults(result);
 },[getLeaves]);
+//useEffect hook for filtering leave data on the basis of search
 React.useEffect(()=>{
  const results = leaveResults.filter((leave) =>{
    if(leave.employee.full_name.toLowerCase().includes(searchTerm)){
@@ -81,14 +89,15 @@ React.useEffect(()=>{
     );
 setSearchResults(results);
 },[searchTerm]);
+//useEffect hook for notiufication on new leave arrival
 React.useEffect(()=>{
   if(localStorage.getItem('leaves')<leaveResults.length){
-    // window.alert('new application added');
 toast.success('new application added',{
   position: "top-right",
   autoClose: false,
 hideProgressBar: true
 });
+//storing number of leaves in localStorage for notification purpose
   localStorage.setItem('leaves',leaveResults.length);
   
   }
@@ -97,6 +106,7 @@ hideProgressBar: true
   }
  console.log(localStorage.getItem('leaves'));
 },[leaveResults]);
+//edit button handler
 const handleEdit=(id)=>{
 history.push(`/empLeave/${id}`)
 }

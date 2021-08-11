@@ -7,6 +7,10 @@ import {ToastContainer,toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 // reactstrap components
 import {
+  Input,
+  InputGroupText,
+  InputGroup,
+  InputGroupAddon,
   Badge,
   Card,
   CardHeader,

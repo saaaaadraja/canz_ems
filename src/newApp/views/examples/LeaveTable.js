@@ -80,8 +80,8 @@ React.useEffect(()=>{
 setSearchResults(results);
 },[searchTerm]);
 React.useEffect(()=>{
-  if(!localStorage.getItem('leaves') && leaveResults.lenght){
-       window.alert('new application added');
+  if(localStorage.getItem('leaves') && !leaveResults.lenght){
+      //window.alert('new application added');
         localStorage.setItem('leaves',leaveResults.length);
   }
   if(localStorage.getItem('leaves')<leaveResults.length){

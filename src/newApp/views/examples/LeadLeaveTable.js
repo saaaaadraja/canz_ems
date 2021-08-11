@@ -1,7 +1,11 @@
+///packages used in this program 
 import React from "react";
  import {API,graphqlOperation} from "aws-amplify";
 import {listLeaves} from '../../../graphql/queries'
 import {useHistory} from 'react-router'
+import {ToastContainer,toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+//importing id from app
 import {id} from '../../../App'
 import {getEmployee} from '../../../graphql/queries'
 // reactstrap components
@@ -20,32 +24,47 @@ import {
 } from "reactstrap";
 // core components
 import Header from "../../components/Headers/Header.js";
-
+//LeadLeaveTables strated form here
 const LeadLeaveTables = () => {
-  const userId = id[id.length-1];
-  
-  const [leaveResult,setLeaveResult] = React.useState([]);
-  const [empName,setEmpName]= React.useState('');
-  const history=useHistory();
-     const [getLeaves,setGetLeaves]=React.useState([]);
-  const fetchData= async ()=>{
-  try{
+//assigning userId
+const userId = id[id.length-1];
+//useState hooks used in this program
+const [leaveResult,setLeaveResult] = React.useState([]);
+const [empName,setEmpName]= React.useState('');
+const history=useHistory();
+const [getLeaves,setGetLeaves]=React.useState([]);
+//function for fetching leave record from database
+const fetchData= async ()=>{
+try{
     const data=await API.graphql(graphqlOperation(getEmployee,{id:userId}))
     const empData = data.data.getEmployee.full_name;
     setEmpName(empData);
  const LeavesData = await API.graphql(graphqlOperation(listLeaves))
  const Ldata = LeavesData.data.listLeaves.items;
+  //function for comparing data and arranging it in ascending order
+ const compare=(a,b)=>{
+   if(a.createdAt>b.createdAt){
+     return -1;
+   }
+   if(a.createdAt>b.createdAt){
+return 1;
+   }
+   return 0;
+ }
+ //sorting function
+ Ldata.sort(compare);
+ //storing sorted leaves in getLeaves hook
  setGetLeaves(Ldata);
   }
   catch(error){
     console.log('error on fetching data',error);
   }
 }
+//useEffect hook for fetching leave data at the begining of program
 React.useEffect(()=>{
-fetchData()
-
+fetchData();
 },[])
-
+//handling edit
 const handleEdit=(id,Approval)=>{
   if(Approval==='pending')
   {
@@ -55,12 +74,30 @@ history.push(`/leadLeaveEdit/${id}`)
    window.alert('you can not edit after Hr approval/rejection');
   }
 }
+//useEffect hook for filtering leave records on the basis of applicant supervisor
 React.useEffect(()=>{
-
 const result = getLeaves.filter((leave)=>leave.supervisor.toLowerCase()===empName.toLowerCase());
 setLeaveResult(result);
-
 },[getLeaves])
+
+//useEffect hook for notification on new leave arrival
+React.useEffect(()=>{
+  if(localStorage.getItem('leaves')<leaveResult.length){
+toast.success(`${leaveResult[0].full_name} is applied for leave`,{
+  position: "top-right",
+  autoClose: false,
+hideProgressBar: true
+});
+//storing number of leaves in localStorage for notification purpose
+  localStorage.setItem('leaves',leaveResult.length);
+  
+  }
+  if(leaveResult.length>0 &&  localStorage.getItem('leaves')>leaveResult.length ){
+      localStorage.setItem('leaves',leaveResult.length);
+  }
+ console.log(localStorage.getItem('leaves'));
+},[leaveResult]);
+
   return (
     <>
       <Header />
@@ -142,6 +179,7 @@ setLeaveResult(result);
           </div>
         </Row>   
       </Container>
+      <ToastContainer/>
     </>
   );
 };

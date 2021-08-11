@@ -2,7 +2,6 @@ import React from "react";
  import {useParams} from 'react-router'
 // reactstrap components
 import {
-  Badge,
   Card,
   CardHeader,
   CardFooter,
@@ -10,20 +9,10 @@ import {
   DropdownItem,
   UncontrolledDropdown,
   DropdownToggle,
-  Media,
-  Pagination,
-  PaginationItem,
-  PaginationLink,
   // Progress,
   Table,
   Container,
   Row,
-  InputGroupText,
-  Form,
-  InputGroup,
-  InputGroupAddon,
-  Input,
-  FormGroup
     // UncontrolledTooltip,
 } from "reactstrap";
 import 'react-bootstrap';
@@ -35,16 +24,14 @@ import {useHistory} from 'react-router'
 
 
 const Jobs = () => {
-
-    const userId=useParams().id;
+  const userId=useParams().id;
   const history=useHistory();
   const [jobs,setJobs]=React.useState([]);
 React.useEffect(()=>{
        fetchJobs();
-      
     },[]);
 
-    const fetchJobs=async()=>{
+const fetchJobs=async()=>{
 const data=await API.graphql(graphqlOperation(getEmployee,{id:userId}))
 const empData = data.data.getEmployee.jobs;
 if(empData){
@@ -53,7 +40,7 @@ setJobs(empData.items)
 else{
 console.log('there is no job present');
 }
-  }
+}
 
 
 const handleEdit =(id)=>{

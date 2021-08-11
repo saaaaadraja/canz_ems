@@ -6,7 +6,7 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {getEmployee} from '../../../graphql/queries'
-import {API,graphqlOperation,Storage} from "aws-amplify";
+import {API,graphqlOperation} from "aws-amplify";
 import {
   Card,
   CardHeader,

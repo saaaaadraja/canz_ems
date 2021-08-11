@@ -5,22 +5,14 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import {useHistory} from 'react-router'
 import Header from "../../components/Headers/Header";
  import {API,graphqlOperation} from "aws-amplify";
 import {listEmployees} from '../../../graphql/queries'
-import {name} from '../../../App'
 import {
-  Badge,
   Card,
   CardHeader,
   CardFooter,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-  DropdownToggle,
   Media,
- 
   Table,
   Container,
   Row,
@@ -43,10 +35,8 @@ const useStyles = makeStyles((theme) => ({
 
 
 const OwnerTeam = () => {
-   const history=useHistory();
     const [lads,setLads]=React.useState('');
     const [canz,setCanz]=React.useState('');
-const userName=name[name.length-1];
 const [getEmployee,setGetEmployee]=React.useState([]);
  const [searchResults, setSearchResults] = React.useState([]);
 

@@ -84,8 +84,10 @@ setSearchResults(results);
 React.useEffect(()=>{
   if(localStorage.getItem('leaves')<leaveResults.length){
     // window.alert('new application added');
-toast.info('new application added',{
-  position: "top-right"
+toast.success('new application added',{
+  position: "top-right",
+  autoClose: false,
+hideProgressBar: true
 });
   localStorage.setItem('leaves',leaveResults.length);
   

@@ -1,6 +1,6 @@
 ///packages used in this program 
 import React from "react";
- import {API,graphqlOperation} from "aws-amplify";
+import {API,graphqlOperation} from "aws-amplify";
 import {listLeaves} from '../../../graphql/queries'
 import {useHistory} from 'react-router'
 import {ToastContainer,toast} from 'react-toastify'
@@ -79,7 +79,6 @@ React.useEffect(()=>{
 const result = getLeaves.filter((leave)=>leave.supervisor.toLowerCase()===empName.toLowerCase());
 setLeaveResult(result);
 },[getLeaves])
-
 //useEffect hook for notification on new leave arrival
 React.useEffect(()=>{
   if(localStorage.getItem('leaves')<leaveResult.length){
@@ -90,7 +89,6 @@ hideProgressBar: true
 });
 //storing number of leaves in localStorage for notification purpose
   localStorage.setItem('leaves',leaveResult.length);
-  
   }
   if(leaveResult.length>0 &&  localStorage.getItem('leaves')>leaveResult.length ){
       localStorage.setItem('leaves',leaveResult.length);

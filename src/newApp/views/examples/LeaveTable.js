@@ -2,6 +2,8 @@ import React from "react";
  import {API,graphqlOperation} from "aws-amplify";
 import {listLeaves} from '../../../graphql/queries'
 import {useHistory} from 'react-router'
+import {ToastContainer,toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 // reactstrap components
 import {
   Input,
@@ -81,8 +83,10 @@ setSearchResults(results);
 },[searchTerm]);
 React.useEffect(()=>{
   if(localStorage.getItem('leaves')<leaveResults.length){
-    window.alert('new application added');
-     
+    // window.alert('new application added');
+toast.info('new application added',{
+  position: "top-right"
+});
   localStorage.setItem('leaves',leaveResults.length);
   
   }
@@ -276,6 +280,7 @@ history.push(`/empLeave/${id}`)
       </Container>
     </>)
     }
+    <ToastContainer/>
     </>
   );
 };

@@ -45,10 +45,10 @@ const [searchResults, setSearchResults] = React.useState([]);;
  const data = LeavesData.data.listLeaves.items;
  //function for comparing data and arranging it in ascending order
  const compare=(a,b)=>{
-   if(a.from<b.from){
+   if(a.createdAt>b.createdAt){
      return -1;
    }
-   if(a.from>b.from){
+   if(a.createdAt>b.createdAt){
 return 1;
    }
    return 0;

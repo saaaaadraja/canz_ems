@@ -55,7 +55,6 @@ return 1;
  }
  //sorting function
  data.sort(compare);
- data.reverse();
  //assigning sorted leaves data to getLeaves Hook
  setGetLeaves(data);
   }

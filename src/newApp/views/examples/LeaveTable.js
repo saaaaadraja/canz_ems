@@ -39,7 +39,7 @@ const history=useHistory();
   try{
  const LeavesData = await API.graphql(graphqlOperation(listLeaves))
  const data = LeavesData.data.listLeaves.items;
- //function for comparing data and arranging it in ascending order
+ //function for comparing data and arranging it in ascending orders
  const compare=(a,b)=>{
     if(a.createdAt>b.createdAt){
      return -1;
@@ -51,7 +51,6 @@ return 1;
  }
  //sorting function
  data.sort(compare);
- data.reverse();
  //storing sorted leaves in getLeaves hook
  setGetLeaves(data);
   }

@@ -1,3 +1,4 @@
+//pakages for this program
 import React from "react";
  import {API,graphqlOperation} from "aws-amplify";
 import {listLeaves} from '../../../graphql/queries'
@@ -24,7 +25,7 @@ import {
 } from "reactstrap";
 // core components
 import Header from "../../components/Headers/Header.js";
-
+//LeaveTables functional component starting from here
 const LeaveTables = () => {
   //useState hooks used in this program
 const [leaveResults,setLeaveResults]=React.useState([]);
@@ -58,7 +59,7 @@ return 1;
     console.log('error on fetching data',error);
   }
 }
-//useEffect hook for fetching leaves from database
+//useEffect hook for fetching leaves from database  on initial run
 React.useEffect(()=>{
 fetchData();
 },[])

@@ -23,7 +23,6 @@ import ChangingPassword from "./components/Form/ChangingPassword";
 
 
 function Index() {
-    // id.push(useParams().id);
   return(
  <Router>
     <Switch>

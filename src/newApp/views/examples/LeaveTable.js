@@ -86,7 +86,7 @@ const LeaveTables = () => {
   //useEffect hook for notification on new leave arrival
   React.useEffect(() => {
     if (localStorage.getItem("leaves") < leaveResults.length) {
-      toast.success(`${leaveResults[0].full_name} is applied for leave`, {
+      toast.success(`${leaveResults[0].employee.full_name} is applied for leave`, {
         position: "top-right",
         autoClose: false,
         hideProgressBar: true,

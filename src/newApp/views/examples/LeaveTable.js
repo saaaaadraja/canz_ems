@@ -64,7 +64,7 @@ const LeaveTables = () => {
   //useEffect hook for filtering leaves for hr manager module
   React.useEffect(() => {
     const result = getLeaves.filter((leave) => {
-      if (leave.Lead_Approval === "approved" || leave.supervisor === "hr") {
+      if (leave.Lead_Approval === "approved" ) {
         return true;
       } else {
         return false;

@@ -59,6 +59,15 @@ roleArr.push(data.data.getEmployee.role);
 empSupervisor.push(data.data.getEmployee.supervisor);  
 emp_full_name.push(data.data.getEmployee.full_name);  
 name.push(data.data.getEmployee.employee_name);
+
+if(data.data.getEmployee.status.toLowerCase()==='left'){
+setEr({'errMsg':'your account is disabled please contact to HR department'});
+window.setTimeout(()=>{
+setEr({'errMsg':''});
+ },5000);
+  setLoading(false);
+}
+else{
 if(data.data.getEmployee.company.toLowerCase()==='canz studios' || data.data.getEmployee.role==='hr manager' || data.data.getEmployee.role==='owner'
 ){
     setFormState({...formState,formType:'signedIn'})
@@ -70,6 +79,7 @@ else
 setEr({'errMsg':''});
  },5000);
   setLoading(false);
+}
 }
       }
     catch(err){

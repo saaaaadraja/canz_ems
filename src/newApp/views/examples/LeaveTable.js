@@ -213,9 +213,18 @@ if(role==='lead'){
   }
   }, [leaveResults]);
   //edit button handler
-  const handleEdit = (id) => {
+    const handleEdit = (id) => {
+  if(role==='hr manager' || role==='hr'){
     history.push(`/empLeave/${id}`);
-  };
+}
+if(role==='lead'){
+    if (Approval === "pending") {
+      history.push(`/leadLeaveEdit/${id}`);
+    } else {
+      window.alert("you can not edit after Hr approval/rejection");
+    }
+}
+}
 
   return (
     <>

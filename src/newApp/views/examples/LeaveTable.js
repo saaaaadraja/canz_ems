@@ -213,7 +213,7 @@ if(role==='lead'){
   }
   }, [leaveResults]);
   //edit button handler
-    const handleEdit = (id) => {
+    const handleEdit = (id,Approval) => {
   if(role==='hr manager' || role==='hr'){
     history.push(`/empLeave/${id}`);
 }
@@ -415,7 +415,7 @@ if(role==='lead'){
                                   >
                                     <DropdownItem
                                       href="#pablo"
-                                      onClick={(e) => handleEdit(leave.id)}
+                                      onClick={(e) => handleEdit(leave.id,leave.Hr_Approval)}
                                     >
                                       Edit
                                     </DropdownItem>

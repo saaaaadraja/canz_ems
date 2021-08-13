@@ -1,7 +1,7 @@
 //pakages for this program 
 import React from "react";
 import { API, graphqlOperation } from "aws-amplify";
-import { listLeaves } from "../../../graphql/queries";
+import { listLeaves,getEmployee } from "../../../graphql/queries";
 import { useHistory } from "react-router";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -23,23 +23,39 @@ import {
   Container,
   Row,
 } from "reactstrap";
+import {roleArr} from '../../../App';
+//importing Hr full name field from app.js
+import { emp_full_name } from "../../../App";
+//importing id from app
+import { id } from "../../../App";
 // core components
 import Header from "../../components/Headers/Header.js";
 //LeaveTables functional component starting from here
 const LeaveTables = () => {
+  
   //useState hooks used in this program
   const [leaveResults, setLeaveResults] = React.useState([]);
   const [searchTerm, setSearchTerm] = React.useState("");
   const [searchResults, setSearchResults] = React.useState([]);
   const [getLeaves, setGetLeaves] = React.useState([]);
+  const [empName, setEmpName] = React.useState("");
   //useHistory function assinging
   const history = useHistory();
+  //assinging hr full name to variable
+  const hrName = emp_full_name[emp_full_name.length - 1];
+  //assigning userId
+  const userId = id[id.length - 1];
+    //assinging role to variable
+  const role=roleArr[roleArr.length-1];
   //function for fetching leave data from database
-  const fetchData = async () => {
+
+    const fetchData = async () => {
+      if(role==='hr' || role==='hr manager'){
     try {
       const LeavesData = await API.graphql(graphqlOperation(listLeaves));
       const data = LeavesData.data.listLeaves.items;
-      //function for comparing data and arranging it in ascending orders
+     
+         //function for comparing data and arranging it in ascending orders
       const compare = (a, b) => {
         if (a.updatedAt > b.updatedAt) {
           return -1;
@@ -53,16 +69,46 @@ const LeaveTables = () => {
       data.sort(compare);
       //storing sorted leaves in getLeaves hook
       setGetLeaves(data);
-    } catch (error) {
+      } catch (error) {
       console.log("error on fetching data", error);
     }
   };
+   if(role==='lead'){
+    try {
+      const data = await API.graphql(
+        graphqlOperation(getEmployee, { id: userId })
+      );
+      const empData = data.data.getEmployee.full_name;
+      setEmpName(empData);
+      const LeavesData = await API.graphql(graphqlOperation(listLeaves));
+      const Ldata = LeavesData.data.listLeaves.items;
+      //function for comparing data and arranging it in ascending order
+      const compare = (a, b) => {
+        if (a.createdAt > b.createdAt) {
+          return -1;
+        }
+        if (a.createdAt > b.createdAt) {
+          return 1;
+        }
+        return 0;
+      };
+      //sorting function
+      Ldata.sort(compare);
+      //storing sorted leaves in getLeaves hook
+      setGetLeaves(Ldata);
+    } catch (error) {
+      console.log("error on fetching data", error);
+    }
+    }
+  };
+    
   //useEffect hook for fetching leaves from database  on initial run
   React.useEffect(() => {
     fetchData();
   }, []);
-  //useEffect hook for filtering leaves for hr manager module
+  //useEffect hook for filtering leaves for hr manager, hr and team lead module
   React.useEffect(() => {
+     if(role=='hr manager'){
     const result = getLeaves.filter((leave) => {
       if (leave.Lead_Approval === "approved" || leave.employee.role === "lead") {
         return true;
@@ -71,7 +117,33 @@ const LeaveTables = () => {
       }
     });
     setLeaveResults(result);
+  }
+if(role==='hr'){
+    const result = getLeaves.filter((leave) => {
+      if (!leave.employee.company) {
+        return false;
+      } else {
+        if (
+          (leave.employee.company.toLowerCase() === "canz studios" &&
+            leave.Lead_Approval === "approved") || leave.supervisor === hrName
+        ) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    });
+    setLeaveResults(result);
+  }
+if(role==='lead'){
+  // filtering leave records on the basis of applicant supervisor
+    const result = getLeaves.filter(
+      (leave) => leave.supervisor.toLowerCase() === empName.toLowerCase()
+    );
+    setLeaveResults(result);
+}
   }, [getLeaves]);
+
   //useEffect hook for filtering leave data on the basis of search
   React.useEffect(() => {
     const results = leaveResults.filter((leave) => {
@@ -85,22 +157,60 @@ const LeaveTables = () => {
   }, [searchTerm]);
   //useEffect hook for notification on new leave arrival
   React.useEffect(() => {
-    if (localStorage.getItem("leaves") < leaveResults.length) {
+    if(role==='hr manager'){
+    if (localStorage.getItem("managerLeaves") < leaveResults.length) {
       toast.success(`${leaveResults[0].employee.full_name} is applied for leave`, {
         position: "top-right",
         autoClose: false,
         hideProgressBar: true,
       });
       //storing number of leaves in localStorage for notification purpose
-      localStorage.setItem("leaves", leaveResults.length);
+      localStorage.setItem("managerLeaves", leaveResults.length);
     }
     if (
       leaveResults.length > 0 &&
-      localStorage.getItem("leaves") > leaveResults.length
+      localStorage.getItem("managerLeaves") > leaveResults.length
     ) {
-      localStorage.setItem("leaves", leaveResults.length);
+      localStorage.setItem("managerLeaves", leaveResults.length);
     }
-    console.log(localStorage.getItem("leaves"));
+    console.log(localStorage.getItem("managerLeaves"));
+  }
+  if(role==='hr'){
+      if (localStorage.getItem("hrLeaves") < leaveResults.length) {
+      toast.success(`${leaveResults[0].employee.full_name} is applied for leave`, {
+        position: "top-right",
+        autoClose: false,
+        hideProgressBar: true,
+      });
+      //storing number of leaves in localStorage for notification purpose
+      localStorage.setItem("hrLeaves", leaveResults.length);
+    }
+    if (
+      leaveResults.length > 0 &&
+      localStorage.getItem("hrLeaves") > leaveResults.length
+    ) {
+      localStorage.setItem("hrLeaves", leaveResults.length);
+    }
+    console.log(localStorage.getItem("hrLeaves"));
+  }
+  if(role==='lead'){
+     if (localStorage.getItem("leadLeaves") < leaveResults.length) {
+      toast.success(`${leaveResults[0].employee.full_name} is applied for leave`, {
+        position: "top-right",
+        autoClose: false,
+        hideProgressBar: true,
+      });
+      //storing number of leaves in localStorage for notification purpose
+      localStorage.setItem("leadLeaves", leaveResults.length);
+    }
+    if (
+      leaveResults.length > 0 &&
+      localStorage.getItem("leadLeaves") > leaveResults.length
+    ) {
+      localStorage.setItem("leadLeaves", leaveResults.length);
+    }
+    console.log(localStorage.getItem("leadLeaves"));
+  }
   }, [leaveResults]);
   //edit button handler
   const handleEdit = (id) => {

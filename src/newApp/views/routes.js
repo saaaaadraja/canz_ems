@@ -43,7 +43,7 @@ import HrLeaveTable from './examples/HrLeaveTable'
     path: "/leaves",
     name: "Leaves",
     icon: "ni ni-bullet-list-67 text-red",
-    component: HrLeaveTable,
+    component: LeaveTables,
     layout: "/admin",
   }
 ];
@@ -105,7 +105,7 @@ export var lead = [
     path: "/LeadEmpTable",
     name: "Employee Leaves",
     icon: "ni ni-bullet-list-67 text-red",
-    component: LeadLeaveTable,
+    component: LeaveTables,
     layout: "/admin",
   }
   ,

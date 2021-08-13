@@ -3,6 +3,8 @@ import React from "react";
 import {getEmployee} from '../../../graphql/queries'
 import {API,graphqlOperation} from "aws-amplify";
 import {id} from '../../../App'
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 // reactstrap components
 import {
   Badge,
@@ -24,7 +26,6 @@ import Header from "../../components/Headers/Header.js";
 import {useHistory} from 'react-router'
 
 const LeaveOfEmployee = () => {
-// const id="1";
  const history=useHistory();
 
     const [Leave,setLeave]=React.useState([]);
@@ -32,12 +33,37 @@ const LeaveOfEmployee = () => {
   try{
 const LeavesData=await API.graphql(graphqlOperation(getEmployee,{id:id[id.length-1]}))
  const data = LeavesData.data.getEmployee.leaves.items;
+ //function for comparing data and arranging it in ascending orders
+      const compare = (a, b) => {
+        if (a.updatedAt > b.updatedAt) {
+          return -1;
+        }
+        if (a.updatedAt > b.updatedAt) {
+          return 1;
+        }
+        return 0;
+      };
+      //sorting function
+      data.sort(compare);
+      //storing sorted leaves in getLeaves hook
  setLeave(data);
   }
   catch(error){
     console.log('error on fetching data',error);
   }
 }
+//useEffect hook for notification on new leave arrival
+  React.useEffect(() => {
+    localStorage.setItem('notify',Leave.map((leave)=>leave.Lead_Approval==='pendig' || leave.Hr_Approval==='pending'));
+    if (localStorage.getItem("notify").length < Leave.length) {
+      toast.success(`${Leave[0].employee.full_name} is applied for leave`, {
+        position: "top-right",
+        autoClose: false,
+        hideProgressBar: true,
+      });
+    }
+  }, [Leave]);
+  //click button handler function
 const clickHandler=(e)=>{
     e.preventDefault();
     history.push('/leaveForm');
@@ -189,6 +215,7 @@ React.useEffect(()=>{
           </div>
         </Row>   
       </Container>
+     <ToastContainer />
     </>
   );
 };

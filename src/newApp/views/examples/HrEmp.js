@@ -1,7 +1,6 @@
 import React from "react";
 // reactstrap components
 import {
-  Badge,
   Card,
   CardHeader,
   CardFooter,
@@ -10,19 +9,14 @@ import {
   UncontrolledDropdown,
   DropdownToggle,
   Media,
-  Pagination,
-  PaginationItem,
-  PaginationLink,
   // Progress,
   Table,
   Container,
   Row,
   InputGroupText,
-  Form,
   InputGroup,
   InputGroupAddon,
   Input,
-  FormGroup
     // UncontrolledTooltip,
 } from "reactstrap";
 import 'react-bootstrap';

@@ -1,12 +1,10 @@
 import Profile from "./examples/Profile.js";
 import Tables from "./examples/Tables.js";
 import LeaveTables from './examples/LeaveTable'
-import LeadLeaveTable from './examples/LeadLeaveTable'
 import LeaveOfEmployee from './examples/LeaveOfEmployee'
 import LeadEmp from './examples/LeadEmp'
 import OwnerTeam from './examples/OwnerTeam'
 import HrEmp from './examples/HrEmp'
-import HrLeaveTable from './examples/HrLeaveTable'
   export var owner= [
   {
     path: "/index",
@@ -119,29 +117,3 @@ export var lead = [
 ];
 
 
-var routes = [
-  // {
-  //   path: "/index",
-  //   name: "User Profile",
-  //   icon: "ni ni-single-02 text-yellow",
-  //   component: Profile,
-  //   layout: "/admin",
-  // },
-  // {
-  //   path: "/tables",
-  //   name: "Employees",
-  //   icon: "ni ni-bullet-list-67 text-red",
-  //   component: Tables,
-  //   layout: "/admin",
-  // },
-  // {
-  //   path: "/leaves",
-  //   name: "Leaves",
-  //   icon: "ni ni-bullet-list-67 text-red",
-  //   component: LeaveTables,
-  //   layout: "/admin",
-  // }
-];
-
-
-export default routes;

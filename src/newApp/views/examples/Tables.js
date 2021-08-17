@@ -26,8 +26,10 @@ import Header from "../../components/Headers/Header";
 import { API, graphqlOperation } from "aws-amplify";
 import { listEmployees } from "../../../graphql/queries";
 import { useHistory } from "react-router";
+import {roleArr} from '../../../App';
 
 const Tables = () => {
+  const role=roleArr[roleArr.length-1];
   const history = useHistory();
   const [getEmployee, setGetEmployee] = React.useState([]);
   const [currentPage, setCurrentPage] = React.useState(1);
@@ -38,7 +40,26 @@ const Tables = () => {
   React.useEffect(() => {
     fetchData();
   }, []);
-
+React.useEffect(()=>{
+  if(role==='hr'){
+const results = getEmployee.filter((person) =>{
+   if(person.company.toLowerCase()==='canz studios'){
+     return true
+   }
+   else{
+     return false
+   }
+     
+ }
+    );
+    setGetEmployee(results);
+    setSearchResults(results);
+}
+if(role==='hr manager'){
+  setGetEmployee(getEmployee);
+  setSearchResults(getEmployee);
+}
+},[getEmployee])
   const fetchData = async () => {
     try {
       const EmployeeData = await API.graphql(graphqlOperation(listEmployees));

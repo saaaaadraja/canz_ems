@@ -34,7 +34,7 @@ import HrEmp from './examples/HrEmp'
     path: "/team",
     name: "Employees",
     icon: "ni ni-bullet-list-67 text-red",
-    component: Tables,
+    component: HrEmp,
     layout: "/admin",
   },
   {

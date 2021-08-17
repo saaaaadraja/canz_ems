@@ -95,7 +95,6 @@ setEr({'errMsg':''});
   }
 
 const signIn=async (e)=>{
-    e.preventDefault();
    const {username,password} = formState;
        setLoading(true);
        if(username.toLowerCase()==='admin' && password.toLowerCase()==='admin'){
@@ -106,7 +105,6 @@ const signIn=async (e)=>{
 const info=await Auth.currentUserInfo();
  id.push(info.attributes.sub);
  const data=await API.graphql(graphqlOperation(getEmployee,{id:info.attributes.sub}))
-console.log(data.data.getEmployee.role);
 roleArr.push(data.data.getEmployee.role);
 empSupervisor.push(data.data.getEmployee.supervisor);
 emp_full_name.push(data.data.getEmployee.full_name);

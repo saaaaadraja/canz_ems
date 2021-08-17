@@ -49,13 +49,11 @@ const LeaveTables = () => {
     //assinging role to variable
   const role=roleArr[roleArr.length-1];
   //function for fetching leave data from database
-
     const fetchData = async () => {
       if(role==='hr' || role==='hr manager'){
     try {
       const LeavesData = await API.graphql(graphqlOperation(listLeaves));
       const data = LeavesData.data.listLeaves.items;
-     
          //function for comparing data and arranging it in ascending orders
       const compare = (a, b) => {
         if (a.updatedAt > b.updatedAt) {
@@ -102,7 +100,6 @@ const LeaveTables = () => {
     }
     }
   };
-    
   //useEffect hook for fetching leaves from database  on initial run
   React.useEffect(() => {
     fetchData();
@@ -144,7 +141,6 @@ if(role==='lead'){
     setLeaveResults(result);
 }
   }, [getLeaves]);
-
   //useEffect hook for filtering leave data on the basis of search
   React.useEffect(() => {
     const results = leaveResults.filter((leave) => {

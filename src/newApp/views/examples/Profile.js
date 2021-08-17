@@ -254,6 +254,24 @@ React.useEffect(()=>{
     console.log(localStorage.getItem("warnings"));
 },[empWarnings])
 
+React.useEffect(()=>{
+ if (localStorage.getItem("evaluation") < empEvaluation.length) {
+      toast.success('there is new warning for you', {
+        position: "top-right",
+        autoClose: false,
+        hideProgressBar: true,
+      });
+      //storing number of leaves in localStorage for notification purpose
+      localStorage.setItem("evaluation", empEvaluation.length);
+    }
+    if (
+     empEvaluation.length > 0 &&
+      localStorage.getItem("evaluation") > empEvaluation.length
+    ) {
+      localStorage.setItem("evaluation", empEvaluation.length);
+    }
+    console.log(localStorage.getItem("evaluation"));
+},[empEvaluation])
 const classes = useStyles();
 
   return (

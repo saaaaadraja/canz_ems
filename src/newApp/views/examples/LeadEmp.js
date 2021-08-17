@@ -47,7 +47,13 @@ const LeadEmp = () => {
   };
   //Filter Lead Team From Employees List
   React.useEffect(() => {
-    const results = GetEmployee.filter(person => person.supervisor.toLowerCase() === fullName.toLowerCase());
+    const results = GetEmployee.filter((person) => {
+      if(person.supervisor.toLowerCase() === fullName.toLowerCase()){
+      return true;
+    }else{
+      return false;
+    }
+    });
     setSearchResults(results);
   }, [GetEmployee]);
   //Pushing Evaluation Form Route

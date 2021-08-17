@@ -41,8 +41,6 @@ else{
 console.log('there is no job present');
 }
 }
-
-
 const handleEdit =(id)=>{
 history.push(`/editjob/${userId}/${id}`);
 }
@@ -56,7 +54,6 @@ const backHandler = ()=>{
     <>
       <Header />
       <Container className="mt--5" fluid>
-        
         <Row>
           <div className="col" >
              <h1 class='text-white ml-5 font-weight-bolder'>Job History</h1>
@@ -64,15 +61,6 @@ const backHandler = ()=>{
               <CardHeader className="border-5" style={{display:'flex',flexDirection:'row',position:'relative'}}>
                 <button class="btn btn-white mx-2" type="submit" onClick={clickHandler}><i class="fa fa-plus"  aria-hidden="true"></i></button>
                  <button class="btn btn-primary mx-2" type="submit" style={{position:'absolute',right:'5px'}} onClick={backHandler}>Back</button>
-                   
-              {/* <InputGroup className="input-group-alternative" style={{width:'30vw',boxShadow:'1px 1px 2px lightGray'}}>
-                <InputGroupAddon addonType="prepend">
-                  <InputGroupText >
-                    <i className="fas fa-search" />
-                  </InputGroupText>
-                </InputGroupAddon>
-                <Input placeholder="Search by employee name / Lead name"  type="text" value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value.toLowerCase())}  />
-              </InputGroup> */}
               </CardHeader>
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light">
@@ -88,7 +76,6 @@ const backHandler = ()=>{
                   {
                  jobs.map((job,i)=>{
               return (<>
-              
                <tr >
                     <td>{job.start_date}</td>
                     <td>{job.end_date}</td>

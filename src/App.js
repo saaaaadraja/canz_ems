@@ -70,7 +70,7 @@ setEr({'errMsg':''});
 else{
 if(data.data.getEmployee.company.toLowerCase()==='canz studios' || data.data.getEmployee.role==='hr manager' || data.data.getEmployee.role==='owner'
 ){
-    setFormState({...formState,formType:'signedIn'})
+    setFormState({username:'',password:'',formType:'signedIn'})
 }
 else
 {
@@ -99,7 +99,7 @@ const signIn=async (e)=>{
    const {username,password} = formState;
        setLoading(true);
        if(username.toLowerCase()==='admin' && password.toLowerCase()==='admin'){
-         setFormState({...formState,formType:'addnew'})
+         setFormState({username:'',password:'',formType:'addnew'})
        }
        else{
       Auth.signIn(username,password).then(async(res)=>{
@@ -120,7 +120,7 @@ setEr({'errMsg':''});
 }
 else{
 if(data.data.getEmployee.company.toLowerCase()==='canz studios'|| data.data.getEmployee.role.toLowerCase()==='hr manager' || data.data.getEmployee.role.toLowerCase()==='owner'){
-    setFormState({...formState,formType:'signedIn'})
+    setFormState({username:'',password:'',formType:'signedIn'})
 }
 else
 {

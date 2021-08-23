@@ -1,28 +1,27 @@
 import Profile from "./examples/Profile.js";
 import Tables from "./examples/Tables.js";
-import LeaveTables from './examples/LeaveTable'
-import LeaveOfEmployee from './examples/LeaveOfEmployee'
-import LeadEmp from './examples/LeadEmp'
-import OwnerTeam from './examples/OwnerTeam'
-import HrEmp from './examples/HrEmp'
-  export var owner= [
+import LeaveTables from "./examples/LeaveTable";
+import LeaveOfEmployee from "./examples/LeaveOfEmployee";
+import LeadEmp from "./examples/LeadEmp";
+import OwnerTeam from "./examples/OwnerTeam";
+import HrEmp from "./examples/HrEmp";
+export var owner = [
   {
     path: "/index",
     name: "User Profile",
     icon: "ni ni-single-02 text-yellow",
     component: Profile,
     layout: "/admin",
-  }
-  ,
-   {
+  },
+  {
     path: "/team",
     name: "Teams",
     icon: "ni ni-bullet-list-67 text-red",
     component: OwnerTeam,
     layout: "/admin",
-  }
+  },
 ];
- export var hr = [
+export var hr = [
   {
     path: "/index",
     name: "User Profile",
@@ -43,7 +42,7 @@ import HrEmp from './examples/HrEmp'
     icon: "ni ni-bullet-list-67 text-red",
     component: LeaveTables,
     layout: "/admin",
-  }
+  },
 ];
 export var manager = [
   {
@@ -66,7 +65,7 @@ export var manager = [
     icon: "ni ni-bullet-list-67 text-red",
     component: LeaveTables,
     layout: "/admin",
-  }
+  },
 ];
 export var emp = [
   {
@@ -82,7 +81,7 @@ export var emp = [
     icon: "ni ni-bullet-list-67 text-red",
     component: LeaveOfEmployee,
     layout: "/admin",
-  }
+  },
 ];
 export var lead = [
   {
@@ -99,21 +98,18 @@ export var lead = [
     component: LeaveOfEmployee,
     layout: "/admin",
   },
-   {
+  {
     path: "/LeadEmpTable",
     name: "Employee Leaves",
     icon: "ni ni-bullet-list-67 text-red",
     component: LeaveTables,
     layout: "/admin",
-  }
-  ,
-   {
+  },
+  {
     path: "/team",
     name: "Team",
     icon: "ni ni-bullet-list-67 text-red",
     component: LeadEmp,
     layout: "/admin",
-  }
+  },
 ];
-
-

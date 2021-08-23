@@ -271,7 +271,7 @@ const Profile = () => {
 
   React.useEffect(() => {
     if (localStorage.getItem("warnings") < empWarnings.length) {
-      toast.success("there is new warning for you", {
+      toast.warning("there is new warning for you", {
         position: "top-right",
         autoClose: false,
         hideProgressBar: true,
@@ -290,7 +290,7 @@ const Profile = () => {
 
   React.useEffect(() => {
     if (localStorage.getItem("evaluation") < empEvaluation.length) {
-      toast.success("there is new warning for you", {
+      toast.success("there is new evaluation form for you", {
         position: "top-right",
         autoClose: false,
         hideProgressBar: true,
